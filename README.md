@@ -32,46 +32,5 @@
 
 ## 在线体验
 
+- https://ruoyi-react.oakhole.top
 - admin/admin123
-- 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
-
-## 演示视频
-
-https://gitee.com/whiteshader/images/raw/master/demo.mp4
-
-## 演示图
-
-<table>
-    <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/login.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/dashboard.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/user.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/useredit.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/role.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/role-edit.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/menu.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/menu-edit.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/config.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/dict.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/loginlog.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/operlog.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/server.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/cache.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/job.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/swager.png"/></td>
-    </tr>
-</table>
