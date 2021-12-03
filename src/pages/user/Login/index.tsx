@@ -100,7 +100,7 @@ const Login: React.FC = () => {
   return (
     <div className={styles.container}>
       <video autoPlay muted loop playsInline preload="auto" poster="/poster/1.png">
-        <source src="/video/1.mp4" type="video/mp4" />
+        <source src="https://www.emotibot.com/Home/img/video/202102241015.mp4" type="video/mp4" />
       </video>
       <div className={styles.content}>
         <div className={styles.form}>
@@ -136,6 +136,7 @@ const Login: React.FC = () => {
               onFinish={async (values) => {
                 await handleSubmit(values as API.LoginParams);
               }}
+              isKeyPressSubmit={true}
             >
               <Tabs activeKey={type} onChange={setType}>
                 <Tabs.TabPane key="account" tab={'账户密码登录'} />
