@@ -1,0 +1,25 @@
+@import '~antd/es/style/themes/default.less';
+
+.card {
+  margin-bottom: 12px;
+}
+
+.miniChart {
+  position: relative;
+  width: 100%;
+  .chartContent {
+    position: absolute;
+    bottom: -28px;
+    width: 100%;
+    > div {
+      margin: 0 -5px;
+      overflow: hidden;
+    }
+  }
+  .chartLoading {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    margin-left: -7px;
+  }
+}

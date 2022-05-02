@@ -6,6 +6,8 @@ import { request } from 'umi';
 export async function currentUser(options?: { [key: string]: any }) {
   return request<{
     user?: API.CurrentUser;
+    permissions: string[];
+    roles: string[];
   }>('/api/getInfo', {
     method: 'GET',
     ...(options || {}),
@@ -34,7 +36,7 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
 
 /** 此处后端没有提供注释 GET /api/notices */
 export async function getNotices(options?: { [key: string]: any }) {
-  return request<API.NoticeIconList>('/api/notices', {
+  return request<API.NoticeIconList>('https://proapi.azurewebsites.net//api/notices', {
     method: 'GET',
     ...(options || {}),
   });

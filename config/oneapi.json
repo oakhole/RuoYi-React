@@ -560,7 +560,9 @@
             "type": "string",
             "format": "any"
           },
-          "key": { "type": "string" },
+          "key": {
+            "type": "string"
+          },
           "read": {
             "type": "boolean"
           },

@@ -1,7 +1,7 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-layout';
 export default () => {
-  const defaultMessage = 'RuoYi v4.7.0，视频来源于网络（侵删）';
+  const defaultMessage = 'Based on RuoYi v4.7.0';
   const currentYear = new Date().getFullYear();
   return (
     <DefaultFooter

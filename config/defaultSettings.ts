@@ -5,10 +5,11 @@ const Settings: LayoutSettings & {
   logo?: string;
 } = {
   navTheme: 'dark',
-  // 拂晓蓝
   primaryColor: '#1890ff',
+  headerHeight: 48,
   layout: 'side',
   contentWidth: 'Fluid',
+  splitMenus: false,
   fixedHeader: true,
   fixSiderbar: true,
   colorWeak: false,
@@ -16,7 +17,6 @@ const Settings: LayoutSettings & {
   pwa: false,
   logo: 'http://vue.ruoyi.vip/static/img/logo.4eeb8a8e.png',
   iconfontUrl: '',
-  footerRender: false,
 };
 
 export default Settings;

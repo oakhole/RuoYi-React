@@ -1,0 +1,1903 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "\u5ba0\u7269\u5546\u5e97 API \u6587\u6863",
+    "version": "1.0.0",
+    "description": "\u8fd9\u662f\u4e00\u7bc7\u5173\u4e8e\u5ba0\u7269\u5546\u5e97\u7684 DEMO API \u6587\u6863\uff0c\u4ec5\u505a\u53c2\u8003\u3002",
+    "contact": {
+      "name": "CODING",
+      "url": "https://coding.net",
+      "email": "support@coding.net"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "http://swagger.io/terms/"
+  },
+  "servers": [
+    {
+      "url": "https://petstore.com/api/v1",
+      "description": "\u751f\u4ea7\u73af\u5883"
+    },
+    {
+      "url": "http://test.petstore.com/api/v1",
+      "description": "\u6d4b\u8bd5\u73af\u5883"
+    }
+  ],
+  "paths": {
+    "/pets": {
+      "get": {
+        "summary": "\u5ba0\u7269\u5217\u8868",
+        "tags": ["\u5ba0\u7269"],
+        "responses": {
+          "200": {
+            "description": "\u4ee5\u6570\u7ec4\u5f62\u5f0f\u8fd4\u56de\u5ba0\u7269\u4fe1\u606f",
+            "headers": {
+              "X-PAGESIZE": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "\u9650\u5236\u6bcf\u9875\u8fd4\u56de\u6570\u91cf"
+              },
+              "X-PAGE": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "\u5f53\u524d\u9875\u7801"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "\u5ba0\u7269\u4fe1\u606f",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                },
+                "examples": {
+                  "\u8bf7\u6c42\u6210\u529f\u8303\u4f8b": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "category": {
+                          "id": 1,
+                          "name": "\u91d1\u6bdb"
+                        },
+                        "status": "available",
+                        "photoUrls": ["http://petstore.com/1.png"],
+                        "name": "doggie",
+                        "isHealthy": true,
+                        "tags": [
+                          {
+                            "id": 1,
+                            "name": "\u72d7\u72d7"
+                          }
+                        ]
+                      },
+                      {
+                        "id": 2,
+                        "category": {
+                          "id": 1,
+                          "name": "\u91d1\u6bdb"
+                        },
+                        "status": "available",
+                        "photoUrls": ["http://petstore.com/2.png"],
+                        "name": "gucci",
+                        "isHealthy": true,
+                        "tags": [
+                          {
+                            "id": 1,
+                            "name": "\u72d7\u72d7"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "\u53c2\u6570\u6709\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u8303\u4f8b": {
+                    "value": {
+                      "code": 2003,
+                      "type": "ERROR",
+                      "message": "pagesize \u5fc5\u987b\u5927\u4e8e 0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-pets",
+        "description": "\u5217\u51fa\u6240\u6709\u5ba0\u7269\u4fe1\u606f",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "pagesize",
+            "description": "\u9650\u5236\u6bcf\u9875\u8fd4\u56de\u6570\u91cf\uff08\u6700\u5927\u9650\u5236\uff1a100\uff09"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "description": "\u9875\u7801"
+          }
+        ],
+        "security": [
+          {
+            "petstore_auth": ["read:pets"]
+          }
+        ]
+      },
+      "post": {
+        "summary": "\u65b0\u589e\u5ba0\u7269",
+        "operationId": "post-pets",
+        "responses": {
+          "201": {
+            "description": "\u521b\u5efa\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                },
+                "examples": {
+                  "\u521b\u5efa\u6210\u529f\u8303\u4f8b": {
+                    "value": {
+                      "id": 1,
+                      "category": {
+                        "name": "\u91d1\u6bdb",
+                        "id": 1
+                      },
+                      "status": "available",
+                      "photoUrls": ["http://petstore.com/1.png"],
+                      "name": "doggie",
+                      "isHealthy": true,
+                      "tags": [
+                        {
+                          "id": 1,
+                          "name": "\u72d7\u72d7"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "petID \u8f93\u5165\u683c\u5f0f\u6709\u8bef"
+          },
+          "422": {
+            "description": "\u4f20\u5165\u53c2\u6570\u6709\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u8303\u4f8b": {
+                    "value": {
+                      "code": 2000,
+                      "type": "ERROR",
+                      "message": "categoryId \u5fc5\u586b"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["\u5ba0\u7269"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "categoryId": {
+                    "type": "integer",
+                    "description": "\u5206\u7c7b ID"
+                  },
+                  "status": {
+                    "type": "string",
+                    "default": "available",
+                    "description": "\u72b6\u6001",
+                    "enum": ["available", "pending", "sold"]
+                  },
+                  "photoUrls": {
+                    "type": "array",
+                    "description": "\u7167\u7247\u5730\u5740\u5217\u8868",
+                    "items": {
+                      "type": "string",
+                      "description": "\u7167\u7247\u5730\u5740"
+                    }
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "\u5ba0\u7269\u540d\u79f0"
+                  },
+                  "isHealthy": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "\u662f\u5426\u5065\u5eb7"
+                  },
+                  "tagIds": {
+                    "type": "array",
+                    "description": "\u6807\u7b7e ID \u6570\u7ec4",
+                    "items": {
+                      "type": "integer",
+                      "description": "\u6807\u7b7e ID"
+                    }
+                  }
+                },
+                "required": ["categoryId", "photoUrls", "name"]
+              },
+              "examples": {
+                "\u65b0\u589e\u8bf7\u6c42\u8303\u4f8b": {
+                  "value": {
+                    "categoryId": 1,
+                    "status": "available",
+                    "photoUrls": ["http://petstore.com/1.png"],
+                    "name": "doggie",
+                    "isHealthy": true
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": "\u65b0\u589e\u5ba0\u7269\u64cd\u4f5c",
+        "security": [
+          {
+            "petstore_auth": ["read:pets", "write:pets"]
+          }
+        ]
+      }
+    },
+    "/pets/{petId}": {
+      "parameters": [
+        {
+          "name": "petId",
+          "in": "path",
+          "required": true,
+          "schema": [],
+          "description": "\u5ba0\u7269 ID"
+        }
+      ],
+      "get": {
+        "summary": "\u5ba0\u7269\u8be6\u60c5",
+        "tags": ["\u5ba0\u7269"],
+        "responses": {
+          "200": {
+            "description": "\u5ba0\u7269\u8be6\u60c5\u6210\u529f\u8fd4\u56de",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                },
+                "examples": {
+                  "JSON \u6210\u529f\u8303\u4f8b": {
+                    "value": {
+                      "id": 1,
+                      "category": {
+                        "name": "\u91d1\u6bdb",
+                        "id": 1
+                      },
+                      "status": "available",
+                      "photoUrls": ["http://petstore.com/1.png"],
+                      "name": "doggie",
+                      "isHealthy": true,
+                      "tags": [
+                        {
+                          "id": 1,
+                          "name": "\u72d7\u72d7"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                },
+                "examples": {
+                  "XML \u6210\u529f\u793a\u4f8b": {
+                    "value": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <Pet> <id>1</id> <category><id>1</id> <name>\u91d1\u6bdb</name> </category> <name>doogie</name> <photoUrls>http://petstore.com/1.png</photoUrls><isHealthy>true</isHealthy><tags> <id>1</id> <name>\u72d7\u72d7</name> </tags> <status>available</status></Pet>"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["application/json", "application/xml"]
+                },
+                "description": "\u5a92\u4f53\u7c7b\u578b"
+              }
+            }
+          },
+          "400": {
+            "description": "petID \u8f93\u5165\u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          }
+        },
+        "operationId": "get-pet",
+        "description": "\u83b7\u53d6\u6307\u5b9a ID \u7684\u5ba0\u7269\u8be6\u60c5",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["application/json", "application/xml"],
+              "default": "application/json"
+            },
+            "in": "header",
+            "name": "Accept",
+            "description": "\u8fd4\u56de\u6570\u636e\u5a92\u4f53\u7c7b\u578b"
+          }
+        ],
+        "security": [
+          {
+            "petstore_auth": ["read:pets"]
+          }
+        ]
+      },
+      "put": {
+        "summary": "\u66f4\u65b0\u5ba0\u7269\u4fe1\u606f",
+        "operationId": "put-pet",
+        "responses": {
+          "200": {
+            "description": "\u66f4\u65b0\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                },
+                "examples": {
+                  "\u66f4\u65b0\u6210\u529f\u8fd4\u56de": {
+                    "value": {
+                      "id": 1,
+                      "category": {
+                        "name": "\u91d1\u6bdb",
+                        "id": 1
+                      },
+                      "status": "sold",
+                      "photoUrls": ["http://petstore.com/1.png"],
+                      "name": "doggie",
+                      "isHealthy": true,
+                      "tags": [
+                        {
+                          "id": 1,
+                          "name": "\u72d7\u72d7"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "petID \u8f93\u5165\u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          },
+          "422": {
+            "description": "\u4f20\u5165\u53c2\u6570\u6709\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u8303\u4f8b": {
+                    "value": {
+                      "code": 2001,
+                      "type": "ERROR",
+                      "message": "categoryId \u5fc5\u987b\u4e3a int"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "\u5168\u91cf\u66f4\u65b0\u5ba0\u7269\u4fe1\u606f",
+        "tags": ["\u5ba0\u7269"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "categoryId": {
+                    "type": "integer",
+                    "description": "\u5206\u7c7b ID"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "\u72b6\u6001",
+                    "enum": ["available", "pending", "sold"]
+                  },
+                  "photoUrls": {
+                    "type": "array",
+                    "description": "\u7167\u7247\u5730\u5740\u5217\u8868",
+                    "items": {
+                      "type": "string",
+                      "description": "\u7167\u7247\u5730\u5740"
+                    }
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "\u5ba0\u7269\u540d\u79f0"
+                  },
+                  "isHealthy": {
+                    "type": "boolean",
+                    "description": "\u662f\u5426\u5065\u5eb7"
+                  },
+                  "tagIds": {
+                    "type": "array",
+                    "description": "\u6807\u7b7e ID \u6570\u7ec4",
+                    "items": {
+                      "type": "integer",
+                      "description": "\u6807\u7b7e ID"
+                    }
+                  }
+                },
+                "required": ["categoryId", "status", "photoUrls", "name", "isHealthy", "tagIds"]
+              },
+              "examples": {
+                "\u66f4\u65b0\u8303\u4f8b": {
+                  "value": {
+                    "categoryId": 1,
+                    "status": "sold",
+                    "photoUrls": ["http://petstore.com/1.png"],
+                    "name": "doggie",
+                    "isHealthy": true
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": [
+          {
+            "petstore_auth": ["read:pets", "write:pets"]
+          }
+        ]
+      },
+      "patch": {
+        "summary": "\u5355\u72ec\u66f4\u65b0\u5ba0\u7269\u5c5e\u6027",
+        "operationId": "patch-pet",
+        "responses": {
+          "200": {
+            "description": "\u66f4\u65b0\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                },
+                "examples": {
+                  "\u66f4\u65b0\u6210\u529f": {
+                    "value": {
+                      "id": 1,
+                      "category": {
+                        "name": "\u91d1\u6bdb",
+                        "id": 1
+                      },
+                      "status": "sold",
+                      "photoUrls": ["http://petstore.com/1.png"],
+                      "name": "doggie",
+                      "isHealthy": true,
+                      "tags": [
+                        {
+                          "id": 1,
+                          "name": "\u72d7\u72d7"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "petID \u8f93\u5165\u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          },
+          "422": {
+            "description": "\u4f20\u5165\u53c2\u6570\u6709\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u8303\u4f8b": {
+                    "value": {
+                      "code": 2001,
+                      "type": "ERROR",
+                      "message": "categoryId \u5fc5\u987b\u4e3a int"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "\u5355\u72ec\u66f4\u65b0\u5ba0\u7269\u5c5e\u6027",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "categoryId": {
+                    "type": "integer",
+                    "description": "\u5206\u7c7b ID"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "\u72b6\u6001",
+                    "enum": ["available", "pending", "sold"]
+                  },
+                  "photoUrls": {
+                    "type": "array",
+                    "description": "\u7167\u7247\u5730\u5740\u5217\u8868",
+                    "items": {
+                      "type": "string",
+                      "description": "\u7167\u7247\u5730\u5740"
+                    }
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "\u5ba0\u7269\u540d\u79f0"
+                  },
+                  "isHealthy": {
+                    "type": "boolean",
+                    "description": "\u662f\u5426\u5065\u5eb7"
+                  },
+                  "tagIds": {
+                    "type": "string",
+                    "description": "\u6807\u7b7e ID \u6570\u7ec4"
+                  }
+                }
+              },
+              "examples": {
+                "\u66f4\u65b0\u8303\u4f8b": {
+                  "value": {
+                    "status": "sold"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": ["\u5ba0\u7269"],
+        "deprecated": true,
+        "security": [
+          {
+            "petstore_auth": ["read:pets", "write:pets"]
+          }
+        ]
+      },
+      "delete": {
+        "summary": "\u5220\u9664\u5ba0\u7269",
+        "operationId": "delete-pet",
+        "responses": {
+          "204": {
+            "description": "\u5220\u9664\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "\u6d88\u606f\u7801"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "\u7c7b\u578b",
+                      "enum": ["SUCCESS", "ERROR"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "\u5f02\u5e38\u4fe1\u606f"
+                    }
+                  }
+                },
+                "examples": {
+                  "\u5220\u9664\u6210\u529f": {
+                    "value": {
+                      "code": 0,
+                      "type": "SUCCESS",
+                      "message": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "petID \u8f93\u5165\u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          }
+        },
+        "description": "\u5220\u9664\u5ba0\u7269\u64cd\u4f5c",
+        "tags": ["\u5ba0\u7269"],
+        "security": [
+          {
+            "petstore_auth": ["read:pets", "write:pets"]
+          }
+        ]
+      }
+    },
+    "/pets/{petId}/uploadImage": {
+      "post": {
+        "summary": "\u4e0a\u4f20\u7167\u7247",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          },
+          "400": {
+            "description": "petID \u8f93\u5165\u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          }
+        },
+        "operationId": "post-pet-upload-image",
+        "description": "\u4e0a\u4f20\u7167\u7247\u63a5\u53e3",
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary",
+                "description": "binary \u5f62\u5f0f\u4e0a\u4f20\u6587\u4ef6"
+              }
+            }
+          },
+          "description": "\u4e0a\u4f20\u6587\u4ef6"
+        },
+        "tags": ["\u5ba0\u7269"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["application/octet-stream"]
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "\u5a92\u4f53\u7c7b\u578b",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "petstore_auth": ["read:pets", "write:pets"]
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "petId",
+          "in": "path",
+          "required": true,
+          "description": "\u5ba0\u7269 ID"
+        }
+      ]
+    },
+    "/pets/{petId}/uploadFormImage": {
+      "post": {
+        "summary": "\u4f7f\u7528 form-data \u4e0a\u4f20\u7167\u7247",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "\u6d88\u606f\u7801"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "\u7c7b\u578b",
+                      "enum": ["SUCCESS", "ERROR"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "\u5f02\u5e38\u4fe1\u606f"
+                    }
+                  }
+                },
+                "examples": {
+                  "\u4e0a\u4f20\u6210\u529f": {
+                    "value": {
+                      "code": 0,
+                      "type": "SUCCESS",
+                      "message": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "petID \u8f93\u5165\u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          }
+        },
+        "operationId": "post-pet-upload-form-image",
+        "description": "\u4f7f\u7528 form-data \u4e0a\u4f20\u7167\u7247",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "binary \u6587\u4ef6"
+                  }
+                },
+                "required": ["file"]
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": ["\u5ba0\u7269"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["multipart/form-data"]
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "\u5a92\u4f53\u7c7b\u578b",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "petstore_auth": ["read:pets", "write:pets"]
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "petId",
+          "in": "path",
+          "required": true,
+          "description": "\u5ba0\u7269 ID"
+        }
+      ]
+    },
+    "/orders": {
+      "post": {
+        "summary": "\u65b0\u5efa\u5ba0\u7269\u8ba2\u5355",
+        "tags": ["\u5546\u5e97\u8ba2\u5355"],
+        "responses": {
+          "200": {
+            "description": "\u65b0\u5efa\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreOrder"
+                },
+                "examples": {
+                  "\u6210\u529f\u8303\u4f8b": {
+                    "value": {
+                      "id": 1,
+                      "pet": {
+                        "id": 1,
+                        "category": {
+                          "name": "\u91d1\u6bdb"
+                        },
+                        "status": "available",
+                        "photoUrls": ["http://petstore.com/1.png"],
+                        "name": "doggie",
+                        "isHealthy": true,
+                        "tags": [
+                          {
+                            "id": 1,
+                            "name": "\u72d7\u72d7"
+                          }
+                        ]
+                      },
+                      "shipDate": "2019-08-26",
+                      "status": "placed",
+                      "completed": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u5ba0\u7269\u4e0d\u5b58\u5728",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u793a\u4f8b": {
+                    "value": {
+                      "code": 1001,
+                      "type": "ERROR",
+                      "message": "petId \u5bf9\u5e94\u8d44\u6e90\u4e0d\u5b58\u5728"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "\u53c2\u6570\u6821\u9a8c\u4e0d\u901a\u8fc7",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u793a\u4f8b": {
+                    "value": {
+                      "code": 2002,
+                      "type": "ERROR",
+                      "message": "petId \u5fc5\u987b\u4e3a\u6574\u6570"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-orders",
+        "description": "\u65b0\u5efa\u5ba0\u7269\u8ba2\u5355",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "petId": {
+                    "type": "integer",
+                    "description": "\u5ba0\u7269 ID"
+                  },
+                  "shipDate": {
+                    "type": "string",
+                    "description": "\u914d\u9001\u65e5\u671f",
+                    "format": "date"
+                  }
+                },
+                "required": ["petId", "shipDate"]
+              },
+              "examples": {
+                "\u8bf7\u6c42\u8303\u4f8b": {
+                  "value": {
+                    "petId": 1,
+                    "shipDate": "2019-12-12"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["application/json"]
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "\u5a92\u4f53\u7c7b\u578b",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "petstore_auth": ["read:orders", "write:orders"]
+          }
+        ]
+      },
+      "parameters": [],
+      "get": {
+        "summary": "\u5ba0\u7269\u8ba2\u5355\u5217\u8868",
+        "operationId": "get-orders",
+        "responses": {
+          "200": {
+            "description": "\u8bf7\u6c42\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StoreOrder"
+                  }
+                },
+                "examples": {
+                  "\u6210\u529f\u793a\u4f8b": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "pet": {
+                          "id": 1,
+                          "category": {
+                            "name": "\u91d1\u6bdb"
+                          },
+                          "status": "available",
+                          "photoUrls": ["http://petstore.com/1.png"],
+                          "name": "doggie",
+                          "isHealthy": true,
+                          "tags": [
+                            {
+                              "id": 1,
+                              "name": "\u72d7\u72d7"
+                            }
+                          ]
+                        },
+                        "quantity": 1,
+                        "shipDate": "2019-08-26",
+                        "status": "placed",
+                        "completed": false
+                      },
+                      {
+                        "id": 2,
+                        "pet": {
+                          "id": 1,
+                          "category": {
+                            "name": "\u91d1\u6bdb"
+                          },
+                          "status": "sold",
+                          "photoUrls": ["http://petstore.com/2.png"],
+                          "name": "gucci",
+                          "isHealthy": true,
+                          "tags": [
+                            {
+                              "id": 1,
+                              "name": "\u72d7\u72d7"
+                            }
+                          ]
+                        },
+                        "shipDate": "2019-12-26",
+                        "status": "delivered",
+                        "completed": true
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "\u53c2\u6570\u6709\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u8303\u4f8b": {
+                    "value": {
+                      "code": 2004,
+                      "type": "ERROR",
+                      "message": "status \u4e0d\u5b58\u5728\uff0c\u5fc5\u987b\u4e3a placed, approevd, delivered \u5176\u4e2d\u4e4b\u4e00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "\u670d\u52a1\u5f02\u5e38"
+          }
+        },
+        "description": "\u5ba0\u7269\u8ba2\u5355\u5217\u8868",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "shipDate",
+            "description": "\u914d\u9001\u65e5\u671f\uff08YYYY-MM-DD\uff09"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["placed", "approevd", "delivered"]
+            },
+            "in": "query",
+            "name": "status",
+            "description": "\u72b6\u6001"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "completed",
+            "description": "\u8ba2\u5355\u662f\u5426\u5b8c\u6210"
+          }
+        ],
+        "tags": ["\u5546\u5e97\u8ba2\u5355"],
+        "security": [
+          {
+            "petstore_auth": ["read:orders"]
+          }
+        ]
+      }
+    },
+    "/orders/{orderId}": {
+      "get": {
+        "summary": "\u67e5\u8be2\u8ba2\u5355",
+        "tags": ["\u5546\u5e97\u8ba2\u5355"],
+        "responses": {
+          "200": {
+            "description": "\u6210\u529f\u8fd4\u56de",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreOrder"
+                },
+                "examples": {
+                  "\u6210\u529f\u8303\u4f8b": {
+                    "value": {
+                      "id": 1,
+                      "pet": {
+                        "id": 1,
+                        "category": {
+                          "name": "\u91d1\u6bdb"
+                        },
+                        "status": "available",
+                        "photoUrls": ["http://petstore.com/1.png"],
+                        "name": "doggie",
+                        "isHealthy": true,
+                        "tags": [
+                          {
+                            "id": 1,
+                            "name": "\u72d7\u72d7"
+                          }
+                        ]
+                      },
+                      "shipDate": "2019-08-26",
+                      "status": "placed",
+                      "completed": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "orderId \u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          }
+        },
+        "operationId": "get-order",
+        "description": "\u67e5\u8be2\u8ba2\u5355",
+        "parameters": [],
+        "security": [
+          {
+            "petstore_auth": ["read:orders"]
+          }
+        ]
+      },
+      "delete": {
+        "summary": "\u5220\u9664\u5ba0\u7269\u8ba2\u5355",
+        "tags": ["\u5546\u5e97\u8ba2\u5355"],
+        "responses": {
+          "200": {
+            "description": "\u5220\u9664\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u5220\u9664\u6210\u529f": {
+                    "value": {
+                      "code": 0,
+                      "type": "SUCCESS",
+                      "message": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "orderId \u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          }
+        },
+        "operationId": "delete-order",
+        "description": "\u5220\u9664\u5ba0\u7269\u8ba2\u5355",
+        "security": [
+          {
+            "petstore_auth": ["read:orders", "write:orders"]
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "\u8ba2\u5355 ID"
+        }
+      ]
+    },
+    "/orders/getByPetId/{petId}": {
+      "get": {
+        "summary": "\u901a\u8fc7\u5ba0\u7269 ID \u67e5\u8be2\u8ba2\u5355",
+        "tags": ["\u5546\u5e97\u8ba2\u5355"],
+        "responses": {
+          "200": {
+            "description": "\u6210\u529f\u8fd4\u56de",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreOrder"
+                },
+                "examples": {
+                  "\u6210\u529f\u8303\u4f8b": {
+                    "value": {
+                      "id": 1,
+                      "pet": {
+                        "id": 1,
+                        "category": {
+                          "name": "\u91d1\u6bdb"
+                        },
+                        "status": "available",
+                        "photoUrls": ["http://petstore.com/1.png"],
+                        "name": "doggie",
+                        "isHealthy": true,
+                        "tags": [
+                          {
+                            "id": 1,
+                            "name": "\u72d7\u72d7"
+                          }
+                        ]
+                      },
+                      "shipDate": "2019-08-26",
+                      "status": "placed",
+                      "completed": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "petId \u683c\u5f0f\u6709\u8bef"
+          },
+          "404": {
+            "description": "\u8d44\u6e90\u4e0d\u5b58\u5728"
+          }
+        },
+        "operationId": "get-orders-getByPetId",
+        "description": "\u901a\u8fc7\u5ba0\u7269 ID \u67e5\u8be2\u8ba2\u5355",
+        "security": [
+          {
+            "petstore_auth": ["read:orders"]
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "petId",
+          "in": "path",
+          "required": true,
+          "description": "\u5ba0\u7269 ID"
+        }
+      ]
+    },
+    "/login": {
+      "post": {
+        "summary": "\u767b\u5f55",
+        "tags": ["\u4f1a\u8bdd"],
+        "responses": {
+          "200": {
+            "description": "\u767b\u5f55\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u6210\u529f\u8303\u4f8b": {
+                    "value": {
+                      "code": 2005,
+                      "type": "ERROR",
+                      "message": "password \u5fc5\u586b"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "default": "application/json",
+                  "enum": ["application/json"]
+                },
+                "description": "\u5a92\u4f53\u7c7b\u578b"
+              },
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "description": "\u63a5\u53e3\u8c03\u7528\u6b21\u6570\u9650\u5236\uff08\u6bcf\u5c0f\u65f6\uff09"
+              },
+              "X-Ratelimit-Retry-After": {
+                "schema": {
+                  "type": "string",
+                  "default": 60
+                },
+                "description": "\u89e6\u8fbe\u9650\u6d41\u540e\u9700\u8981\u7b49\u5f85\u91cd\u7f6e\u7684\u65f6\u95f4\uff08\u79d2\uff09"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "description": "\u5269\u4f59\u53ef\u8bf7\u6c42\u6570\u91cf"
+              },
+              "X-Ratelimit-Reset": {
+                "schema": {
+                  "type": "integer",
+                  "default": 600
+                },
+                "description": "\u91cd\u7f6e\u9650\u5236\u6b21\u6570\u65f6\u95f4\uff08\u79d2\uff09"
+              }
+            }
+          },
+          "400": {
+            "description": "\u767b\u5f55\u5931\u8d25",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u5931\u8d25\u793a\u4f8b": {
+                    "value": {
+                      "code": "3000",
+                      "type": "ERROR",
+                      "message": "\u7528\u6237\u540d\u6216\u5bc6\u7801\u9519\u8bef"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["application/json"],
+                  "default": "application/json"
+                },
+                "description": "\u5a92\u4f53\u7c7b\u578b"
+              }
+            }
+          },
+          "422": {
+            "description": "\u53c2\u6570\u6709\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u5931\u8d25\u793a\u4f8b": {
+                    "value": {
+                      "code": "3000",
+                      "type": "ERROR",
+                      "message": "\u7528\u6237\u540d\u6216\u5bc6\u7801\u9519\u8bef"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["application/json"],
+                  "default": "application/json"
+                },
+                "description": "\u5a92\u4f53\u7c7b\u578b"
+              }
+            }
+          }
+        },
+        "operationId": "post-login",
+        "description": "\u7528\u6237\u767b\u5f55\u64cd\u4f5c",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "\u7528\u6237\u540d"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "\u5bc6\u7801",
+                    "format": "password"
+                  },
+                  "remember_me": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "\u8bb0\u4f4f\u6211"
+                  }
+                },
+                "required": ["username", "password"]
+              },
+              "examples": {
+                "\u63d0\u4ea4\u8303\u4f8b": {
+                  "value": {
+                    "username": "coding",
+                    "password": "123456",
+                    "remember_me": true
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["multipart/form-data"],
+              "default": "multipart/form-data"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "\u5a92\u4f53\u7c7b\u578b",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/logout": {
+      "get": {
+        "summary": "\u767b\u51fa",
+        "tags": ["\u4f1a\u8bdd"],
+        "responses": {
+          "200": {
+            "description": "\u767b\u51fa\u6210\u529f",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u6210\u529f\u8303\u4f8b": {
+                    "value": {
+                      "code": 0,
+                      "type": "SUCCESS",
+                      "message": "\u767b\u51fa\u6210\u529f"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-logout",
+        "description": "\u7528\u6237\u767b\u51fa"
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": "\u7528\u6237\u6ce8\u518c",
+        "tags": ["\u4f1a\u8bdd"],
+        "responses": {
+          "200": {
+            "description": "\u8bf7\u6c42\u6210\u529f",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "description": "\u63a5\u53e3\u8c03\u7528\u6b21\u6570\u9650\u5236\uff08\u6bcf\u5c0f\u65f6\uff09"
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["application/json"]
+                },
+                "description": "\u5a92\u4f53\u7c7b\u578b"
+              },
+              "X-Ratelimit-Retry-After": {
+                "schema": {
+                  "type": "string",
+                  "default": 60
+                },
+                "description": "\u89e6\u8fbe\u9650\u6d41\u540e\u9700\u8981\u7b49\u5f85\u91cd\u7f6e\u7684\u65f6\u95f4\uff08\u79d2\uff09"
+              },
+              "X-Ratelimit-Reset": {
+                "schema": {
+                  "type": "integer",
+                  "default": 600
+                },
+                "description": "\u91cd\u7f6e\u9650\u5236\u6b21\u6570\u65f6\u95f4\uff08\u79d2\uff09"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "description": "\u5269\u4f59\u53ef\u8bf7\u6c42\u6570\u91cf"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "\u7528\u6237 ID"
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "\u7528\u6237\u540d"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "EMAIL"
+                    },
+                    "mobile": {
+                      "type": "string",
+                      "description": "\u624b\u673a\u53f7"
+                    },
+                    "sex": {
+                      "type": "string",
+                      "description": "\u6027\u522b"
+                    },
+                    "age": {
+                      "description": "\u5e74\u9f84",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "\u6ce8\u518c\u6210\u529f": {
+                    "value": {
+                      "id": 1,
+                      "username": "coding",
+                      "email": "support@coding.net",
+                      "mobile": "13888888888",
+                      "sex": "male",
+                      "age": "18"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u8bf7\u6c42\u9519\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u8303\u4f8b": {
+                    "value": {
+                      "code": "3001",
+                      "type": "ERROR",
+                      "message": "\u7528\u6237\u540d\u5df2\u88ab\u5360\u7528\uff0c\u8bf7\u66f4\u6539\u540e\u91cd\u65b0\u63d0\u4ea4"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "\u53c2\u6570\u6709\u8bef",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u9519\u8bef\u8303\u4f8b": {
+                    "value": {
+                      "code": "2005",
+                      "type": "ERROR",
+                      "message": "\u5bc6\u7801\u8f93\u5165\u6709\u8bef\uff0c\u4ec5\u652f\u6301\u5927\u5c0f\u5199\u5b57\u6bcd\u3001\u6570\u5b57\u4ee5\u53ca !@#$%^&*()_+-=~{}[]:;<>?/.,"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "\u8fbe\u5230\u9650\u6d41",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "\u5931\u8d25\u8303\u4f8b": {
+                    "value": {
+                      "code": "9999",
+                      "type": "ERROR",
+                      "message": "\u8fbe\u5230\u9650\u6d41\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "description": "\u63a5\u53e3\u8c03\u7528\u6b21\u6570\u9650\u5236\uff08\u6bcf\u5c0f\u65f6\uff09"
+              },
+              "X-Ratelimit-Retry-After": {
+                "schema": {
+                  "type": "string",
+                  "default": 60
+                },
+                "description": "\u89e6\u8fbe\u9650\u6d41\u540e\u9700\u8981\u7b49\u5f85\u91cd\u7f6e\u7684\u65f6\u95f4\uff08\u79d2\uff09"
+              },
+              "X-Ratelimit-Reset": {
+                "schema": {
+                  "type": "integer",
+                  "default": 600
+                },
+                "description": "\u91cd\u7f6e\u9650\u5236\u6b21\u6570\u65f6\u95f4\uff08\u79d2\uff09"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "description": "\u5269\u4f59\u53ef\u8bf7\u6c42\u6570\u91cf"
+              }
+            }
+          }
+        },
+        "operationId": "post-register",
+        "description": "\u7528\u6237\u6ce8\u518c",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "\u7528\u6237\u540d"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "\u5bc6\u7801",
+                    "format": "password"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "EMAIL"
+                  },
+                  "mobile": {
+                    "type": "string",
+                    "description": "\u624b\u673a\u53f7"
+                  },
+                  "sex": {
+                    "type": "string",
+                    "description": "\u6027\u522b",
+                    "enum": ["female", "male"]
+                  },
+                  "age": {
+                    "type": "integer",
+                    "description": "\u5e74\u9f84"
+                  },
+                  "agreeTerms": {
+                    "type": "boolean",
+                    "description": "\u7edf\u4e00\u6761\u6b3e"
+                  }
+                },
+                "required": ["username", "password", "sex"]
+              },
+              "examples": {
+                "\u8bf7\u6c42\u8303\u4f8b": {
+                  "value": {
+                    "username": "coding",
+                    "password": "123456",
+                    "email": "support@coding.net",
+                    "mobile": "13888888888",
+                    "sex": "male",
+                    "age": "18",
+                    "agreeTerms": true
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["application/json"]
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "\u5a92\u4f53\u7c7b\u578b",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["application/json"]
+            },
+            "in": "header",
+            "name": "Accept",
+            "description": "\u63a5\u53d7\u54cd\u5e94\u5a92\u4f53\u7c7b\u578b",
+            "required": true
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "title": "Pet",
+        "type": "object",
+        "description": "\u5ba0\u7269\u5b9e\u4f53\u4fe1\u606f",
+        "x-examples": [],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "status": {
+            "type": "string",
+            "description": "\u72b6\u6001",
+            "enum": ["available", "pending", "sold"]
+          },
+          "photoUrls": {
+            "type": "array",
+            "description": "\u7167\u7247\u5730\u5740\u5217\u8868",
+            "items": {
+              "type": "string",
+              "description": "\u7167\u7247\u5730\u5740"
+            }
+          },
+          "name": {
+            "type": "string",
+            "example": "doggie",
+            "description": "\u540d\u79f0"
+          },
+          "isHealthy": {
+            "type": "boolean",
+            "description": "\u662f\u5426\u5065\u5eb7"
+          },
+          "tags": {
+            "type": "array",
+            "description": "\u6807\u7b7e\u5217\u8868",
+            "items": {
+              "type": "object",
+              "description": "\u6807\u7b7e",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "\u540d\u79f0"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Category": {
+        "title": "Category",
+        "type": "object",
+        "description": "\u5ba0\u7269\u5206\u7c7b",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "\u540d\u79f0"
+          }
+        },
+        "required": ["name"]
+      },
+      "JSONResponse": {
+        "title": "Response",
+        "type": "object",
+        "description": "JSON \u6b63\u5e38\u8fd4\u56de",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "\u6d88\u606f\u7801"
+          },
+          "type": {
+            "type": "string",
+            "description": "\u7c7b\u578b",
+            "enum": ["SUCCESS", "ERROR"]
+          },
+          "message": {
+            "type": "string",
+            "description": "\u5f02\u5e38\u4fe1\u606f"
+          }
+        },
+        "example": {
+          "code": 0,
+          "type": "SUCCESS",
+          "message": ""
+        }
+      },
+      "StoreOrder": {
+        "title": "StoreOrder",
+        "type": "object",
+        "description": "\u5546\u5e97\u8ba2\u5355",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "\u8ba2\u5355 ID"
+          },
+          "pet": {
+            "$ref": "#/components/schemas/Pet"
+          },
+          "shipDate": {
+            "type": "string",
+            "format": "date",
+            "description": "\u914d\u9001\u65e5\u671f"
+          },
+          "status": {
+            "type": "string",
+            "default": "placed",
+            "enum": ["placed", "approevd", "delivered"],
+            "description": "\u8ba2\u5355\u72b6\u6001"
+          },
+          "completed": {
+            "type": "boolean",
+            "default": false,
+            "description": "\u8ba2\u5355\u662f\u5426\u5b8c\u6210"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://petstore.com/oauth/authorize",
+            "tokenUrl": "https://petstore.com/oauth/token?grant_type=authorization_code",
+            "scopes": {
+              "write:pets": "\u4fee\u6539\u5ba0\u7269\u4fe1\u606f\u6743\u9650",
+              "read:pets": "\u67e5\u770b\u5ba0\u7269\u4fe1\u606f\u6743\u9650",
+              "write:orders": "\u4fee\u6539\u5ba0\u7269\u8ba2\u5355\u6743\u9650",
+              "read:orders": "\u67e5\u770b\u5ba0\u7269\u8ba2\u5355\u6743\u9650"
+            },
+            "refreshUrl": "https://petstore.com/oauth/token?grant_type=refresh_token"
+          }
+        },
+        "description": "OAuth2 \u6388\u6743\u6a21\u5f0f"
+      }
+    },
+    "responses": {
+      "JsonResponse": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/JSONResponse"
+            },
+            "examples": {
+              "\u6b63\u5e38\u8fd4\u56de": {
+                "value": {
+                  "code": 0,
+                  "type": "SUCCESS",
+                  "message": ""
+                }
+              }
+            }
+          }
+        },
+        "description": "JSON \u6b63\u5e38\u8fd4\u56de"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "\u5ba0\u7269",
+      "description": "\u6240\u6709\u5173\u4e8e\u5ba0\u7269\u7684\u5185\u5bb9",
+      "externalDocs": {
+        "description": "\u66f4\u591a\u4fe1\u606f",
+        "url": "http://coding.net"
+      }
+    },
+    {
+      "name": "\u5546\u5e97\u8ba2\u5355",
+      "description": "\u53ef\u67e5\u770b\u5ba0\u7269\u5546\u5e97\u7684\u8ba2\u5355"
+    },
+    {
+      "name": "\u4f1a\u8bdd",
+      "description": "\u5173\u4e8e\u7528\u6237\u7684\u6ce8\u518c\u3001\u767b\u5f55\u548c\u767b\u51fa"
+    }
+  ]
+}

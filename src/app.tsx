@@ -13,6 +13,7 @@ import { getRouters } from './services/ant-design-pro/menu';
 
 import defaultSettings from '../config/defaultSettings';
 import { message, notification } from 'antd';
+import HeaderContent from './components/HeaderContent';
 
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2825989_d8kc305wcip.js',
@@ -42,10 +43,10 @@ const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
 };
 
 /** 查询时参数转换 */
-const convertPaginationArgs = (url: string, options: RequestOptionsInit) => {
+const convertPaginationArgs = (url: string, options: any) => {
   if (options.method === 'get' && options.params && 'current' in options.params) {
-    options.params['pageNum'] = options.params['current'];
-    delete options.params['current'];
+    options.params.pageNum = options.params.current;
+    delete options.params.current;
     return {
       url: `${url}`,
       options: { ...options, interceptors: true },
@@ -84,7 +85,7 @@ const convertPaginationResponse = async (response: Response) => {
   if ('code' in res) {
     if (res.code === 200) {
       res.success = true;
-    } else if (res.code !== 401) {
+    } else if (res.code !== 500) {
       if (res.msg) {
         message.error(res.msg);
       } else {
@@ -137,11 +138,14 @@ export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   token?: string;
+  collapsed?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
     try {
-      const res = await queryCurrentUser();
+      const res: any = await queryCurrentUser();
+      res.user.permissions = res.permissions;
+      res.user.roles = res.roles;
       return res.user;
     } catch (error) {
       history.push(loginPath);
@@ -162,18 +166,20 @@ export async function getInitialState(): Promise<{
     fetchUserInfo,
     settings: {},
     token: '',
+    collapsed: false,
   };
 }
 
 /** 获取 menu 信息 */
 function fetchMenuData(menuData: any) {
-  menuData.forEach((item: any) => {
-    item.icon = <IconFont type={`icon-${item.meta.icon}`} />;
-    item.name = item.meta.title;
-    item.component = '@pages/system/user';
+  menuData.forEach((menu: any) => {
+    menu.icon = <IconFont type={`icon-${menu.meta.icon}`} />;
+    menu.name = menu.meta.title;
+    menu.component = '@pages/system/user';
 
-    if ('children' in item) {
-      fetchMenuData(item.children);
+    if ('children' in menu) {
+      menu.items = menu.children;
+      fetchMenuData(menu.items);
     }
   });
 
@@ -181,8 +187,19 @@ function fetchMenuData(menuData: any) {
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  const onCollapse = (collapsed: boolean): void => {
+    setInitialState({ ...initialState, collapsed }).then();
+  };
+
   return {
+    headerContentRender: () => <HeaderContent />,
+    onCollapse: onCollapse,
+    collapsed: initialState?.collapsed,
+    // 隐藏菜单中收起按钮
+    collapsedButtonRender: false,
+    breakpoint: 'xl',
+    defaultCollapsed: true,
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
@@ -197,13 +214,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
         history.push(loginPath);
       }
     },
+    SettingDrawer: {},
     links: isDev
       ? [
-          <Link to="/umi/plugin/openapi" target="_blank">
+          <Link to="/umi/plugin/openapi" target="_blank" key={'openApi'}>
             <LinkOutlined />
             <span>OpenAPI 文档</span>
           </Link>,
-          <Link to="/~docs">
+          <Link to="/~docs" key={'component'}>
             <BookOutlined />
             <span>业务组件文档</span>
           </Link>,
@@ -213,8 +231,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     ...initialState?.settings,
-    breakpoint: false,
-    defaultCollapsed: true,
     menu: {
       params: {
         userId: initialState?.currentUser?.userId,
@@ -226,7 +242,20 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
             name: '首页',
             path: '/dashboard',
             icon: <IconFont type="icon-home" />,
-            component: './dashboard/workplace',
+            children: [
+              {
+                name: '工作台',
+                path: '/dashboard/workplace',
+              },
+              {
+                name: '分析页',
+                path: '/dashboard/analysis',
+              },
+              {
+                name: '监控页',
+                path: '/dashboard/monitor',
+              },
+            ],
           },
         ].concat(await fetchMenuData(res.data));
         return menuData;
