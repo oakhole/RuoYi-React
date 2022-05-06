@@ -80,6 +80,7 @@
     "react-helmet-async": "^1.0.4",
     "react-router": "^4.3.1",
     "umi": "^3.5.0",
+    "umi-plugin-keep-alive": "^0.0.1-beta.18",
     "umi-serve": "^1.9.10"
   },
   "devDependencies": {

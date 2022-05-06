@@ -3,6 +3,7 @@ import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
+  tabsLayout?: boolean;
 } = {
   navTheme: 'dark',
   primaryColor: '#1890ff',
@@ -17,6 +18,7 @@ const Settings: LayoutSettings & {
   pwa: false,
   logo: 'http://vue.ruoyi.vip/static/img/logo.4eeb8a8e.png',
   iconfontUrl: '',
+  tabsLayout: true,
 };
 
 export default Settings;

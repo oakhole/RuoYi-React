@@ -1,0 +1,64 @@
+@import '~antd/es/style/themes/default.less';
+.tabItem {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  margin-top: 2px;
+  padding: 0 20px;
+  overflow: hidden;
+  color: @text-color;
+  font-size: @font-size-sm;
+  line-height: 30px;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  background-color: #fff;
+  border-right: solid 1px #eee;
+
+  &:hover {
+    font-weight: bolder;
+    background: @layout-body-background;
+    // background-color: #f2f2f2;
+    cursor: pointer;
+
+    &::before {
+      display: none;
+    }
+
+    & + .tabItem {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .closeIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    color: #ccc;
+    &:hover {
+      color: #c00;
+    }
+  }
+}
+
+.active {
+  color: @primary-color;
+  font-weight: bolder;
+
+  &::before {
+    display: none;
+  }
+
+  & + .tabItem {
+    &::before {
+      display: none;
+    }
+  }
+}
