@@ -19,117 +19,8 @@
   width: 0;
   height: 100vh;
   color: #fff;
-  background-image: url('/login-bg.jpg');
-  .mask {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
-    background-image: linear-gradient(to bottom, #4f46e5, #3b82f6);
-    opacity: 0.75;
-  }
-  .circles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    li {
-      position: absolute;
-      bottom: -150px;
-      display: block;
-      width: 20px;
-      height: 20px;
-      list-style: none;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 9999px;
-      animation: animate 25s linear infinite;
-      &:nth-child(1) {
-        left: 25%;
-        width: 80px;
-        height: 80px;
-        animation-delay: 0s;
-      }
-      &:nth-child(2) {
-        left: 10%;
-        width: 20px;
-        height: 20px;
-        animation-duration: 12s;
-        animation-delay: 2s;
-      }
-      &:nth-child(3) {
-        left: 70%;
-        width: 20px;
-        height: 20px;
-        animation-delay: 4s;
-      }
-      &:nth-child(4) {
-        left: 40%;
-        width: 60px;
-        height: 60px;
-        animation-duration: 18s;
-        animation-delay: 0s;
-      }
-      &:nth-child(5) {
-        left: 65%;
-        width: 20px;
-        height: 20px;
-        animation-delay: 0s;
-      }
-      &:nth-child(6) {
-        left: 75%;
-        width: 110px;
-        height: 110px;
-        animation-delay: 3s;
-      }
-      &:nth-child(7) {
-        left: 35%;
-        width: 150px;
-        height: 150px;
-        animation-delay: 7s;
-      }
-      &:nth-child(8) {
-        left: 50%;
-        width: 25px;
-        height: 25px;
-        animation-duration: 45s;
-        animation-delay: 15s;
-      }
-      &:nth-child(9) {
-        left: 20%;
-        width: 15px;
-        height: 15px;
-        animation-duration: 35s;
-        animation-delay: 2s;
-      }
-      &:nth-child(10) {
-        left: 85%;
-        width: 150px;
-        height: 150px;
-        animation-duration: 11s;
-        animation-delay: 0s;
-      }
-    }
-  }
-  .slogan {
-    z-index: 10;
-    width: 100%;
-    max-width: 28rem;
-    .title {
-      display: block;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-      font-size: 3rem;
-      line-height: 3rem;
-    }
-    .desc {
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
-  }
+  background: url('/login-bg.png') no-repeat 50%;
+  background-size: cover;
 }
 
 @keyframes animate {
@@ -239,10 +130,10 @@
 
 @media (min-width: @screen-md-min) {
   .leftSide {
-    width: 60%;
+    width: 50%;
   }
 
   .rightSide {
-    width: 40%;
+    width: 50%;
   }
 }

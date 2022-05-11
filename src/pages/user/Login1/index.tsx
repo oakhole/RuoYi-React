@@ -7,7 +7,7 @@ import {
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
-import { Alert, Space, message, Tabs, Input, Row } from 'antd';
+import { Alert, Space, message, Tabs, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { Link, history, useModel } from 'umi';
@@ -15,7 +15,6 @@ import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha, getCaptcha } from '@/services/ant-design-pro/login';
 import styles from './index.less';
-import Col from 'antd/es/grid/col';
 
 const LoginMessage: React.FC<{
   content?: string;
@@ -100,9 +99,29 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Row className={styles.content}>
-        <Col md={14} className={styles.leftSide} />
-        <Col md={10} className={styles.rightSide}>
+      <div className={styles.content}>
+        <div className={styles.leftSide}>
+          <div className={styles.mask} />
+          <ul className={styles.circles}>
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+          </ul>
+          <div className={styles.slogan}>
+            <div className={styles.title}>欢迎光临</div>
+            <div className={styles.desc}>
+              欢迎来到好玩俱乐部，在这里和志同道合的朋友一起分享有趣的故事，一起组织有趣的活动...
+            </div>
+          </div>
+        </div>
+        <div className={styles.rightSide}>
           <div className={styles.form}>
             <div className={styles.top}>
               <div className={styles.header}>
@@ -131,9 +150,10 @@ const Login: React.FC = () => {
                     style: {
                       width: '100%',
                       fontWeight: 600,
-                      background: '#518eff',
-                      borderColor: '#518eff',
+                      backgroundImage: 'linear-gradient(to right, #6366f1, #2563eb)',
+                      borderRadius: '9999px',
                       justifyContent: 'center',
+                      backgroundColor: 'transparent',
                     },
                   },
                 }}
@@ -291,8 +311,8 @@ const Login: React.FC = () => {
               <Footer />
             </div>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };
