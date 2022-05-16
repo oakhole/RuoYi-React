@@ -4,7 +4,7 @@ import request from 'umi-request';
 import type { JobLogType, JobLogListParams } from './data.d';
 
 // 查询定时任务调度日志列表
-export async function getJobLogList(params?: JobLogListParams, sort?: any) {
+export async function getJobLogList(params?: any, sort?: any) {
   return request('/api/monitor/jobLog/list', {
     params: paramsSortable(params, sort),
     method: 'GET',

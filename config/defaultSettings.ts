@@ -18,7 +18,7 @@ const Settings: LayoutSettings & {
   pwa: false,
   logo: 'http://vue.ruoyi.vip/static/img/logo.4eeb8a8e.png',
   iconfontUrl: '',
-  tabsLayout: true,
+  tabsLayout: false,
 };
 
 export default Settings;

@@ -183,6 +183,8 @@ const OperlogTableList: React.FC = () => {
       dataIndex: 'operId',
       valueType: 'text',
       hideInSearch: true,
+      copyable: true,
+      ellipsis: true,
     },
     {
       title: <FormattedMessage id="monitor.Operlog.title" defaultMessage="所属模块" />,
@@ -300,7 +302,6 @@ const OperlogTableList: React.FC = () => {
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
-      width: '220px',
       valueType: 'option',
       render: (_, record) => [
         <Button

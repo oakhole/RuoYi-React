@@ -9,9 +9,9 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://vue.ruoyi.vip',
+      target: 'http://localhost:8080',
       changeOrigin: true,
-      pathRewrite: { '^/api': '/prod-api' },
+      pathRewrite: { '^/api': '/' },
     },
   },
   test: {

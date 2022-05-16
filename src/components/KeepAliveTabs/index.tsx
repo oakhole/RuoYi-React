@@ -13,7 +13,6 @@ import { useModel, history, useAliveController } from 'umi';
 import { SortableElement } from 'react-sortable-hoc';
 import SortableTab from './components/SortableTab';
 import styles from './index.less';
-import tabStyles from './components/SortableTab/index.less';
 
 const SortableItem = SortableElement(({ index, value, tabIndex, key }) => (
   <SortableTab key={key} index={index} value={value} tabIndex={tabIndex} />
@@ -26,9 +25,6 @@ const SortableList = SortableContainer(() => {
   return (
     <div className={`${styles.tabList}`} ref={tabsRef}>
       <div className={styles.linkTabs} style={{ transform: `translateX(-${tarnslateX}px)` }}>
-        <a className={tabStyles.tabItem} href={'/'}>
-          首页
-        </a>
         {tabList.map((value, index: number) => (
           // eslint-disable-next-line react/no-array-index-key
           <SortableItem key={`item-${index}`} index={index} value={value} tabIndex={index} />

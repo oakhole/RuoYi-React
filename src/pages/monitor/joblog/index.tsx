@@ -7,7 +7,7 @@ import { useIntl, FormattedMessage, history, useAccess } from 'umi';
 
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import type { JobLogType, JobLogListParams } from './data.d';
+import type { JobLogType } from './data.d';
 import { getJobLogList, removeJobLog, exportJobLog, cleanJobLog } from './service';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
@@ -291,16 +291,7 @@ const JobLogTableList: React.FC = () => {
             <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
           </Button>,
         ]}
-        request={(params) =>
-          getJobLogList({ ...params } as JobLogListParams).then((res) => {
-            const result = {
-              data: res.rows,
-              total: res.total,
-              success: true,
-            };
-            return result;
-          })
-        }
+        request={(params, sort) => getJobLogList({ ...params }, sort)}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
