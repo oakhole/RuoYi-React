@@ -1,0 +1,122 @@
+import type {Request, Response} from "express";
+import Mock from 'mockjs';
+import type { ${ClassName} } from "./data.d";
+
+/**
+ * MOCK: ${functionName}
+ *
+ * @date ${datetime}
+ */
+
+// 模拟单个数据
+function fakeObject(): ${ClassName} {
+    const obj: ${ClassName} = Mock.mock({
+        #foreach($column in $columns)
+            ## 类型转换，将 javaType 转换为 mock 占位符
+            #if($javaType == 'Integer')
+                #set($tsType="@natural(0, 1000)")
+            #elseif($column.javaType == 'Long')
+                #set($tsType="@natural(0, 1000000)")
+            #elseif($column.javaType == 'BigInteger')
+                #set($tsType="@interger()")
+            #elseif($column.javaType == 'BigDecimal')
+                #set($tsType="@float(0, 100, 0, 6)")
+            #elseif($column.javaType == 'Float')
+                #set($tsType="@float(0, 100, 0, 2)")
+            #elseif($column.javaType == 'Decimal')
+                #set($tsType="@float(0, 100, 0, 6)")
+            #elseif($column.javaType == 'Boolean')
+                #set($tsType="@boolean()")
+            #elseif($column.javaType == 'Date')
+                #set($tsType="@date('yyyy-MM-dd HH:mm:ss')")
+            #else
+                #set($tsType="@ctitle(8, 16)")
+            #end
+            // $column.columnComment
+                $column.javaField: "$tsType",
+        #end
+    });
+    return obj;
+}
+
+// 模拟数据列表
+function fakeList(count: number): ${ClassName}[] {
+    const list: ${ClassName}[] = [];
+    for (let i = 0; i < count; i += 1) {
+        list.push(fakeObject());
+    }
+
+    return list;
+}
+
+// 查询${functionName}列表
+function get${ClassName}List(req: Request, res: Response) {
+    const params: any = req.query;
+    const count = params.pageSize || 20;
+    const result = fakeList(Math.floor((Math.random()) * count));
+    return res.json({
+        code: 200,
+        success: true,
+        data: result
+    });
+}
+
+// 获取${functionName}详细信息
+export async function get${ClassName}(req: Request, res: Response) {
+    return res.json({
+        code: 200,
+        success: true,
+        msg: '操作成功',
+        data: fakeObject(),
+    });
+}
+
+// 新增${functionName}
+export async function add${ClassName}(req: Request, res: Response) {
+    return res.json({
+        code: 200,
+        success: true,
+        msg: '操作成功',
+    });
+}
+
+// 修改${functionName}
+export async function update${ClassName}(req: Request, res: Response) {
+    return res.json({
+        code: 200,
+        success: true,
+        msg: '操作成功',
+    });
+}
+
+// 删除${functionName}
+export async function remove${ClassName}(req: Request, res: Response) {
+    return res.json({
+        code: 200,
+        success: true,
+        msg: '操作成功',
+    });
+}
+
+// 导出${functionName}列表
+export async function export${ClassName}(req: Request) {
+    const params: any = req.query;
+    const aLink = document.createElement('a');
+    const blob = new Blob([params], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    aLink.style.display = 'none';
+    aLink.href = URL.createObjectURL(blob);
+    aLink.setAttribute('download', `${businessName}_$#{new Date().getTime()}.xlsx`); // 设置下载文件名称
+    document.body.appendChild(aLink);
+    aLink.click();
+    URL.revokeObjectURL(aLink.href); // 清除引用
+    document.body.removeChild(aLink);
+}
+
+export default {
+    'GET  /api/${moduleName}/${businessName}/list': get${ClassName}List,
+    'GET  /api/${moduleName}/${businessName}/:id': get${ClassName},
+    'POST  /api/${moduleName}/${businessName}': add${ClassName},
+    'PUT  /api/${moduleName}/${businessName}': update${ClassName},
+    'DELETE  /api/${moduleName}/${businessName}/:id': remove${ClassName},
+    'GET  /api/${moduleName}/${businessName}/export': export${ClassName},
+};

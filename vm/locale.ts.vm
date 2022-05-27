@@ -1,0 +1,22 @@
+// ===========// ===========// ===========// ===========//
+// Module: ${moduleName}-${businessName}
+// ===========// ===========// ===========// ===========//
+
+// table & form 标题
+'${moduleName}.${businessName}.tableName': '${functionName}列表',
+'${moduleName}.${businessName}.formName': '编辑${functionName}',
+
+// label 名称
+#foreach ($column in $columns)
+    '${moduleName}.${businessName}.${column.javaField}': '${column.columnComment}',
+#end
+
+// 表单 placeholder
+#foreach ($column in $columns)
+    '${moduleName}.${businessName}.${column.javaField}.placeholder': '请填写${column.columnComment}',
+#end
+
+// 表单规则校验信息
+#foreach ($column in $columns)
+    '${moduleName}.${businessName}.${column.javaField}.rule': '${column.columnComment}不能为空',
+#end

@@ -1,0 +1,60 @@
+import {downLoadXlsx} from "@/utils/downloadFile";
+import {paramsSortable} from "@/utils/utils";
+import request from "umi-request";
+import type { ${ClassName} } from "./data.d";
+
+/**
+ * SERVICE: ${functionName}
+ *
+ * @date ${datetime}
+ */
+
+// 查询${functionName}列表
+export async function get${ClassName}List(params?: any, sort?: any) {
+    return request('/api/${moduleName}/${businessName}/list', {
+        params: paramsSortable(params, sort),
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+    });
+}
+
+// 获取${functionName}详细信息
+export async function get${ClassName}(id: string) {
+    return request(`/api/${moduleName}/${businessName}/$#{id}`, {
+        method: 'GET',
+    });
+}
+
+// 新增${functionName}
+export async function add${ClassName}(params: ${ClassName}) {
+    return request('/api/${moduleName}/${businessName}', {
+        method: 'POST',
+        data: params,
+    });
+}
+
+// 修改${functionName}
+export async function update${ClassName}(params: ${ClassName}) {
+    return request('/api/${moduleName}/${businessName}', {
+        method: 'PUT',
+        data: params,
+    });
+}
+
+// 删除${functionName}
+export async function remove${ClassName}(ids: string) {
+    return request(`/api/${moduleName}/${businessName}/$#{ids}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+    });
+}
+
+// 导出${functionName}列表
+export async function export${ClassName}(params?: ${ClassName}) {
+    return downLoadXlsx(`/api/${moduleName}/${businessName}/export`, {params},
+        `${moduleName}_${businessName}_$#{new Date().getTime()}.xlsx`);
+}

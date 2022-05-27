@@ -1,0 +1,303 @@
+import React from 'react';
+import {
+  ProFormDigit,
+  ProFormText,
+  ProFormRadio,
+  ProFormTextArea,
+  DrawerForm,
+} from '@ant-design/pro-form';
+import { useIntl, FormattedMessage } from 'umi';
+import type { ${ClassName} } from './data.d';
+
+export type ${ClassName}FormValueType = Record<string, unknown> & Partial<${ClassName}>;
+
+export type ${ClassName}FormProps = {
+  onCancel: (flag?: boolean, formVals?: ${ClassName}FormValueType) => void;
+  onSubmit: (values: ${ClassName}FormValueType) => Promise<void>;
+  visible: boolean;
+  values: Partial<${ClassName}>;
+};
+
+const ${ClassName}Form: React.FC<${ClassName}FormProps> = (props) => {
+  // 国际化
+  const intl = useIntl();
+
+  // 字典数据
+
+  // 提交表单
+  const handleFinish = (values: Record<string, any>) => {
+    return props.onSubmit(values as ${ClassName}FormValueType);
+  };
+
+  // 关闭表单
+  const handleClose = () => {
+    props.onCancel();
+  };
+
+  return (
+    <DrawerForm
+      title={intl.formatMessage({
+        id: 'call.area.formName',
+        defaultMessage: '编辑${functionName}',
+      })}
+      visible={props.visible}
+      initialValues={props.values}
+      onFinish={handleFinish}
+      autoFocusFirstInput
+      drawerProps={{
+        destroyOnClose: true,
+        onClose: handleClose,
+        maskClosable: false,
+        keyboard: false,
+      }}
+    >
+      #foreach ($column in $columns)
+      #if(!$table.isSuperColumn($column.javaField))
+      #if($column.pk)
+      <ProFormText
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        disabled
+        hidden={!props.values.${column.javaField}}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请填写${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="${column.columnComment}不能为空！" />,
+          },
+        ]}
+      />
+      #end
+      #if($column.insert && !$column.pk)
+      #if($column.htmlType == 'input')
+      <ProFormText
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请填写${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="${column.columnComment}不能为空！" />,
+          },
+        ]}
+      />
+      #elseif($column.htmlType == 'textarea')
+      <ProFormTextArea
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请填写${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="${column.columnComment}不能为空！" />,
+          },
+        ]}
+      />
+      #elseif($column.htmlType == 'select')
+      <ProFormSelect
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        valueEnum={{
+          open: '未解决',
+          closed: '已解决',
+        }}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请填写${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="请选择${column.columnComment}！" />,
+          },
+        ]}
+      />
+      #elseif($column.htmlType == 'checkbox')
+      <ProFormCheckbox.Group
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        options={['option1', 'option2', 'option3']}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请填写${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="请选择${column.columnComment}！" />,
+          },
+        ]}
+      />
+      #elseif($column.htmlType == 'radio')
+      <ProFormRadio.Group
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        options={[
+          {
+            label: 'item 1',
+            value: 'a',
+          },
+          {
+            label: 'item 2',
+            value: 'b',
+          },
+          {
+            label: 'item 3',
+            value: 'c',
+          },
+        ]}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请填写${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="请选择${column.columnComment}！" />,
+          },
+        ]}
+      />
+      #elseif($column.htmlType == 'datetime')
+      <ProFormDatePicker 
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        placeholder="请选择${column.columnComment}"
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="请选择${column.columnComment}！" />,
+          },
+        ]}
+      />
+      #elseif($column.htmlType == 'image')
+      <ProFormUploadButton
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        valuePropName="file"
+        fieldProps={{
+          action: '/api/common/upload',
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+          name: 'file',
+          maxCount: 1,
+          listType: 'picture-card',
+          defaultFileList: uploadedFileList,
+          onPreview: handlePreview,
+          onChange: handleUpload,
+        }}
+        extra={'需加盖公章'}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请上传${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="请上传${column.columnComment}！" />,
+          },
+        ]}
+      />
+      #elseif($column.htmlType == 'upload')
+      <ProFormUploadDragger
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        valuePropName="file"
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请上传${column.columnComment}',
+        })}
+        extra={
+          <>
+            下载{' '}
+            <a
+              download="文件模板.xlsx"
+              href={'https://x.4001.cn/import-template.xlsx'}
+              rel="noreferrer"
+            >
+              文件模板
+            </a>
+          </>
+        }
+        fieldProps={{
+          accept: '.xls, .xlsx',
+          action: '/api/common/upload',
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+          name: 'file',
+          maxCount: 1,
+          defaultFileList: uploadedFileList,
+          onChange: handleUpload,
+        }}
+        placeholder="请上传${column.columnComment}"
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="请上传${column.columnComment}！" />,
+          },
+        ]}
+      />
+      #else
+      <ProFormText
+        name="${column.javaField}"
+        label={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}',
+          defaultMessage: '${column.columnComment}',
+        })}
+        placeholder={intl.formatMessage({
+          id: '${moduleName}.${businessName}.${column.javaField}.placeholder',
+          defaultMessage: '请上传${column.columnComment}',
+        })}
+        rules={[
+          {
+            required: ${column.required},
+            message: <FormattedMessage id="${moduleName}.${businessName}.${column.javaField}.rule" defaultMessage="${column.columnComment}不能为空！" />,
+          },
+        ]}
+      />
+      #end
+      #end
+      #end
+      #end
+    </DrawerForm>
+  );
+};
+
+export default ${ClassName}Form;

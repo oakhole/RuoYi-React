@@ -1,0 +1,35 @@
+import type {BaseEntity} from "@/models/BaseEntity";
+
+/**
+ * ${functionName} ${tableName}
+ *
+ * @date ${datetime}
+ */
+export interface ${ClassName} extends BaseEntity {
+    #foreach($column in $columns)
+        ## 类型转换，将 javaType 转换为 tsType
+        #if(!$table.isSuperColumn($column.javaField))
+            #if($column.javaType == "Integer")
+                #set($tsType="number")
+            #elseif($column.javaType == "Long")
+                #set($tsType="string")
+            #elseif($column.javaType == "BigInteger")
+                #set($tsType="string")
+            #elseif($column.javaType == "BigDecimal")
+                #set($tsType="string")
+            #elseif($column.javaType == "Float")
+                #set($tsType="number")
+            #elseif($column.javaType == "Decimal")
+                #set($tsType="number")
+            #elseif($column.javaType == "Boolean")
+                #set($tsType="boolean")
+            #elseif($column.javaType == "Date")
+                #set($tsType="string")
+            #else
+                #set($tsType="string")
+            #end
+            // $column.columnComment
+                $column.javaField: $tsType;
+        #end
+    #end
+}

@@ -2,13 +2,53 @@
 
 ## 平台简介
 
-若依(Ruoyi-React)是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
+- 前端：基于 [**`ant-design-pro V5`**](https://github.com/ant-design/ant-design-pro)
+- 后端：基于 [**`Ruoyi-Vue 3.8.2`**](https://gitee.com/y_project/RuoYi-Vue)，主要修改了 json 序列化 `Long/BigInteger/BigDecimal --> String`, 代码如下:
 
-- 前端采用 React、Ant Design Pro、TypeScript。
-- 后端采用 Spring Boot、Spring Security、Redis & Jwt。
-- 权限认证使用 Jwt，支持多终端认证系统。
-- 支持加载动态权限菜单，多方式轻松权限控制。
-- 高效率开发，使用代码生成器可以一键生成前后端代码。
+```java
+//【ruoyi-framework】 src/../config/ApplicationConfig.java
+@Bean
+public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization() {
+    return jacksonObjectMapperBuilder -> {
+        jacksonObjectMapperBuilder.timeZone(TimeZone.getDefault());
+        jacksonObjectMapperBuilder.serializerByType(Long.TYPE, ToStringSerializer.instance);
+        jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance);
+        jacksonObjectMapperBuilder.serializerByType(BigInteger.class, ToStringSerializer.instance);
+        jacksonObjectMapperBuilder.serializerByType(BigDecimal.class, ToStringSerializer.instance);
+    };
+}
+```
+
+## 目录结构
+
+```
+├── config                   # umi 配置，包含路由，构建等配置
+├── mock                     # 本地模拟数据
+├── public
+│   └── favicon.png          # Favicon
+├── src
+│   ├── assets               # 本地静态资源
+│   ├── components           # 业务通用组件
+│   ├── e2e                  # 集成测试用例
+│   ├── layouts              # 通用布局
+│   ├── models               # 全局 dva model
+│   ├── pages                # 业务页面入口和常用模板
+│   ├── services             # 后台接口服务
+│   ├── utils                # 工具库
+│   ├── locales              # 国际化资源
+│   ├── global.less          # 全局样式
+│   └── global.ts            # 全局 JS
+├── tests                    # 测试工具
+├── vm                       # 使用 Velocity 生成页面代码
+├── README.md
+└── package.json
+```
+
+###
+
+`src/pages/document.ejs` js 还没加载成功，但是 html 已经加载成功的 landing 页面，具体可分为 `landing 加载页`、`js 加载前`、`js 加载后`、`业务中的加载`。
+
+> 详情参考 [官方介绍](https://pro.ant.design/zh-CN/docs/title-landing)
 
 ## 内置功能
 
