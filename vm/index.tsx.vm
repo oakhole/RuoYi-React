@@ -6,6 +6,7 @@ import {FormattedMessage, useAccess, useIntl} from 'umi';
 import {FooterToolbar, PageContainer} from '@ant-design/pro-layout';
 import type {ActionType, ProColumns} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
+import type { ProFormInstance } from '@ant-design/pro-form';
 import {add${ClassName}, export${ClassName}, get${ClassName}List, remove${ClassName}, update${ClassName}} from './service';
 import ${ClassName}Form from './Form';
 import type { ${ClassName} } from './data.d';
@@ -13,6 +14,9 @@ import type { ${ClassName} } from './data.d';
 const ${ClassName}TableList: React.FC = () => {
     // ProTable 组件操作引用
     const actionRef = useRef<ActionType>();
+
+    // ProTable 查询表单引用
+    const formRef = useRef<ProFormInstance>();
 
     // 选中状态
     const [currentRow, setCurrentRow] = useState<${ClassName}>();
@@ -74,7 +78,7 @@ const ${ClassName}TableList: React.FC = () => {
             #elseif($column.javaType == "Date")
                 #set($valueType="dateTime")
                 #set($sorter="true")
-                #set($width="180")
+                #set($width="120")
                 #set($ellipsis="false")
                 #if($column.queryType == "BETWEEN")
                 #set($valueType="dateRange")
@@ -82,6 +86,8 @@ const ${ClassName}TableList: React.FC = () => {
             #else
                 #set($valueType="text")
                 #set($ellipsis="true")
+                #set($width="120")
+                #set($ellipsis="false")
             #end
             #set($hideInSearch = !$column.query)
             #set($hideInTable = $table.isSuperColumn($column.javaField) || !$column.list)
@@ -121,7 +127,7 @@ const ${ClassName}TableList: React.FC = () => {
             hideInSearch: true,
             sorter: true,
             defaultSortOrder: 'descend',
-            width: 180,
+            width: 120,
             fixed: 'right',
             align: 'center',
             render: (_, record) => <span>{record.createTime}</span>,
@@ -144,6 +150,7 @@ const ${ClassName}TableList: React.FC = () => {
         {
             title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作"/>,
             dataIndex: 'option',
+            width: 120,
             align: 'center',
             fixed: 'right',
             valueType: 'option',
@@ -205,6 +212,7 @@ const ${ClassName}TableList: React.FC = () => {
                     defaultMessage: '${functionName}列表',
                 })}
                 actionRef={actionRef}
+                formRef={formRef}
                 rowKey="${pkColumn.javaField}"
                 key="${className}List"
                 search={{
@@ -227,7 +235,7 @@ const ${ClassName}TableList: React.FC = () => {
                         key="export"
                         hidden={!access.hasPerms('${moduleName}:${businessName}:export')}
                         onClick={async () => {
-                            await export${ClassName}();
+                            await export${ClassName}(formRef.current?.getFieldsFormatValue?.());
                         }}
                     >
                         <FileExcelOutlined/>{' '}
@@ -241,7 +249,7 @@ const ${ClassName}TableList: React.FC = () => {
                         setSelectedRows(rows);
                     },
                 }}
-                scroll={{ x: 3000 }}
+                scroll={{ x: ${columns.size()} * 120 }}
             />
             {selectedRows?.length > 0 && (
                 <FooterToolbar
