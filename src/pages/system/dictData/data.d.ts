@@ -3,6 +3,7 @@ export type DictDataType = {
   dictSort: number;
   dictLabel: string;
   dictValue: string;
+  dictName: string;
   dictType: string;
   cssClass: string;
   listClass: string;

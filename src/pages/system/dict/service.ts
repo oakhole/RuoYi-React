@@ -14,6 +14,16 @@ export async function getDictTypeList(params?: any, sort?: any) {
   });
 }
 
+// 查询字典类型列表
+export async function optionselect() {
+  return request('/api/system/dict/type/optionselect', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  });
+}
+
 // 查询字典类型详细
 export function getDictType(dictId: string) {
   return request(`/api/system/dict/type/${dictId}`, {

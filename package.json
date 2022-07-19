@@ -79,6 +79,7 @@
     "react-fittext": "^1.0.0",
     "react-helmet-async": "^1.0.4",
     "react-router": "^4.3.1",
+    "react-syntax-highlighter": "^15.5.0",
     "umi": "^3.5.0",
     "umi-plugin-keep-alive": "^0.0.1-beta.18",
     "umi-serve": "^1.9.10"
@@ -93,6 +94,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
+    "@types/react-syntax-highlighter": "^15.5.3",
     "@umijs/fabric": "^2.6.2",
     "@umijs/openapi": "^1.1.14",
     "@umijs/plugin-blocks": "^2.0.5",

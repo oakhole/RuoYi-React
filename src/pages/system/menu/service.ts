@@ -4,7 +4,7 @@ import request from 'umi-request';
 import type { MenuType, MenuListParams } from './data.d';
 
 // 查询菜单权限列表
-export async function getMenuList(params?: MenuListParams, sort: any) {
+export async function getMenuList(params?: MenuListParams, sort?: any) {
   return request('/api/system/menu/list', {
     params: paramsSortable(params, sort),
     method: 'GET',

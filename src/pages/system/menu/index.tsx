@@ -283,8 +283,8 @@ const MenuTableList: React.FC = () => {
               <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
             </Button>,
           ]}
-          request={(params) =>
-            getMenuList({ ...params } as MenuListParams).then((res) => {
+          request={(params, sort) =>
+            getMenuList({ ...params } as MenuListParams, sort).then((res) => {
               const menu = { id: 0, label: '主类目', children: [] as DataNode[], value: 0 };
               const memuData = buildTreeData(res.data, 'menuId', 'menuName', '', '', '');
               menu.children = memuData;
