@@ -66,4 +66,5 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
+  extraPostCSSPlugins: [require('tailwindcss'), require('autoprefixer')],
 });
