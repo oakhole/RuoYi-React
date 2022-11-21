@@ -79,3 +79,23 @@ export function getTreeList(params: any): Promise<DataNode[]> {
     });
   });
 }
+
+// 获取部门列表树结构数据
+export function getDeptTreeList(params: any): Promise<DataNode[]> {
+  return new Promise((resolve) => {
+    const queryString = new URLSearchParams(params).toString();
+    request(`/api/system/user/deptTree?${queryString}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+    }).then((res) => {
+      if (res && res.code === 200) {
+        const treeData = formatTreeSelectData(res.data);
+        resolve(treeData);
+      } else {
+        resolve([]);
+      }
+    });
+  });
+}

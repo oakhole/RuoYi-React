@@ -1,5 +1,13 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 09:53:36
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-11-21 10:26:37
+ * @FilePath: /RuoYi-React/src/pages/system/user/components/DeptTree.tsx
+ * @Description: render dept tree
+ */
 import React, { useState, useEffect } from 'react';
-import { getTreeList } from '../../dept/service';
+import { getDeptTreeList } from '../../dept/service';
 import { Input, Tree } from 'antd';
 
 const { Search } = Input;
@@ -51,7 +59,7 @@ const DeptTree: React.FC<TreeProps> = (props) => {
       }
     };
 
-    getTreeList({}).then((res: any) => {
+    getDeptTreeList({}).then((res: any) => {
       setTreeData(res);
       generateList(res, props.expandDepth || 2);
 

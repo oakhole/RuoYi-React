@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 09:53:36
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-11-21 10:16:34
+ * @FilePath: /RuoYi-React/src/pages/system/user/index.tsx
+ * @Description: 用户列表
+ */
 import { PlusOutlined, FileExcelOutlined, UploadOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Button, message, Modal, Row, Col, Popconfirm, Badge } from 'antd';
@@ -20,7 +28,7 @@ import {
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 import ResetPwd from './components/ResetPwd';
-import { getTreeList as getDeptTreeList } from '../dept/service';
+import { getDeptTreeList as getDeptTreeList } from '../dept/service';
 import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
 import { getPostList } from '../post/service';
