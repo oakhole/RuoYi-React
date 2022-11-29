@@ -3,25 +3,16 @@
 ## 平台简介
 
 - 前端：基于 [**`ant-design-pro V5`**](https://github.com/ant-design/ant-design-pro)
-- 后端：基于 [**`Ruoyi-Vue 3.8.2`**](https://gitee.com/y_project/RuoYi-Vue)，主要修改了 json 序列化 `Long/BigInteger/BigDecimal --> String`, 代码如下:
+- 后端：基于 [**`Ruoyi-Vue 3.8.2`**](https://gitee.com/y_project/RuoYi-Vue)
 
-```java
-//【ruoyi-framework】 src/../config/ApplicationConfig.java
-@Bean
-public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization() {
-    return jacksonObjectMapperBuilder -> {
-        jacksonObjectMapperBuilder.timeZone(TimeZone.getDefault());
-        jacksonObjectMapperBuilder.serializerByType(Long.TYPE, ToStringSerializer.instance);
-        jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance);
-        jacksonObjectMapperBuilder.serializerByType(BigInteger.class, ToStringSerializer.instance);
-        jacksonObjectMapperBuilder.serializerByType(BigDecimal.class, ToStringSerializer.instance);
-    };
-}
-```
+## 在线体验
+
+- https://ruoyi-react.oakhole.top
+- 用户名/密码：`admin` / `admin123`
 
 ## 目录结构
 
-```
+```shell
 ├── config                   # umi 配置，包含路由，构建等配置
 ├── mock                     # 本地模拟数据
 ├── public
@@ -69,8 +60,3 @@ public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization() 
 15. 服务监控：监视当前系统 CPU、内存、磁盘、堆栈等相关信息。
 16. 缓存监控：对系统的缓存信息查询，命令统计等。
 17. 连接池监视：监视当前系统数据库连接池状态，可进行分析 SQL 找出系统性能瓶颈。
-
-## 在线体验
-
-- https://ruoyi-react.oakhole.top
-- admin/admin123
