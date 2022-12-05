@@ -1,6 +1,6 @@
 import { downLoadXlsx } from '@/utils/downloadFile';
 import { paramsSortable } from '@/utils/utils';
-import request from 'umi-request';
+import { request } from '@umijs/max';
 import type { JobLogType, JobLogListParams } from './data.d';
 
 // 查询定时任务调度日志列表

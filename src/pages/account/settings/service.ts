@@ -1,4 +1,4 @@
-import { request } from 'umi';
+import { request } from '@umijs/max';
 import type { GeographicItemType } from './data';
 
 export async function queryCurrentUserInfo(): Promise<{ data: API.GetUserInfoResult }> {

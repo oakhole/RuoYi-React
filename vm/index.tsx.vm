@@ -1,12 +1,12 @@
 import {FileExcelOutlined, PlusOutlined} from '@ant-design/icons';
 import {Button, Modal, Popconfirm} from 'antd';
 import React, {useEffect, useRef, useState} from 'react';
-import {FormattedMessage, useAccess, useIntl} from 'umi';
+import {FormattedMessage, useAccess, useIntl} from '@umijs/max';
 
-import {FooterToolbar, PageContainer} from '@ant-design/pro-layout';
-import type {ActionType, ProColumns} from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
-import type { ProFormInstance } from '@ant-design/pro-form';
+import {FooterToolbar, PageContainer} from '@ant-design/pro-components';
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import type { ProFormInstance } from '@ant-design/pro-components';
 import {add${ClassName}, export${ClassName}, get${ClassName}List, remove${ClassName}, update${ClassName}} from './service';
 import ${ClassName}Form from './Form';
 import type { ${ClassName} } from './data.d';
@@ -205,7 +205,7 @@ const ${ClassName}TableList: React.FC = () => {
     ];
 
     return (
-        <PageContainer breadcrumb={undefined} title={false}>
+        <PageContainer>
             <ProTable<${ClassName}>
                 headerTitle={intl.formatMessage({
                     id: '${moduleName}.${businessName}.tableName',

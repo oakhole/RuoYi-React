@@ -1,14 +1,22 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:53:03
+ * @FilePath: /RuoYi-React/src/pages/system/menu/index.tsx
+ * @Description: 系统管理 - 菜单管理
+ */
 import { PlusOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
 import { Popconfirm } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, useAccess } from 'umi';
+import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
 
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import { FooterToolbar, PageContainer } from '@ant-design/pro-components';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { MenuType, MenuListParams } from './data.d';
 import { getMenuList, removeMenu, addMenu, updateMenu } from './service';
 import UpdateForm from './components/edit';
@@ -256,65 +264,63 @@ const MenuTableList: React.FC = () => {
   const expandedKeys: number[] = [];
 
   return (
-    <GridContent>
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<MenuType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="menuId"
-          key="menuList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          toolBarRender={() => [
-            <Button
-              type="text"
-              key="add"
-              hidden={!access.hasPerms('system:menu:add')}
-              onClick={async () => {
-                setCurrentRow(undefined);
-                setModalVisible(true);
-              }}
-            >
-              <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-            </Button>,
-          ]}
-          request={(params, sort) =>
-            getMenuList({ ...params } as MenuListParams, sort).then((res) => {
-              const menu = { id: 0, label: '主类目', children: [] as DataNode[], value: 0 };
-              const memuData = buildTreeData(res.data, 'menuId', 'menuName', '', '', '');
-              menu.children = memuData;
-              const treeData: any = [];
-              treeData.push(menu);
-              setMenuTree(treeData);
-              return {
-                data: memuData,
-                total: res.data.length,
-                success: true,
-              };
-            })
-          }
-          columns={columns}
-          expandable={{
-            expandRowByClick: true,
-            expandedRowKeys: expandedKeys,
-            onExpand: (expanded, record) => {
-              if (expanded) {
-                expandedKeys.push(record.menuId);
-              } else {
-                remove(expandedKeys, (menuId) => {
-                  return menuId === record.menuId;
-                });
-              }
-            },
-          }}
-          pagination={false}
-        />
-      </div>
+    <PageContainer>
+      <ProTable<MenuType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="menuId"
+        key="menuList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="text"
+            key="add"
+            hidden={!access.hasPerms('system:menu:add')}
+            onClick={async () => {
+              setCurrentRow(undefined);
+              setModalVisible(true);
+            }}
+          >
+            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+          </Button>,
+        ]}
+        request={(params, sort) =>
+          getMenuList({ ...params } as MenuListParams, sort).then((res) => {
+            const menu = { id: 0, label: '主类目', children: [] as DataNode[], value: 0 };
+            const memuData = buildTreeData(res.data, 'menuId', 'menuName', '', '', '');
+            menu.children = memuData;
+            const treeData: any = [];
+            treeData.push(menu);
+            setMenuTree(treeData);
+            return {
+              data: memuData,
+              total: res.data.length,
+              success: true,
+            };
+          })
+        }
+        columns={columns}
+        expandable={{
+          expandRowByClick: true,
+          expandedRowKeys: expandedKeys,
+          onExpand: (expanded, record) => {
+            if (expanded) {
+              expandedKeys.push(record.menuId);
+            } else {
+              remove(expandedKeys, (menuId) => {
+                return menuId === record.menuId;
+              });
+            }
+          },
+        }}
+        pagination={false}
+      />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -375,7 +381,7 @@ const MenuTableList: React.FC = () => {
         statusOptions={statusOptions}
         menuTree={menuTree}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

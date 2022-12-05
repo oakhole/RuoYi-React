@@ -1,5 +1,5 @@
 import { downLoadXlsx } from '@/utils/downloadFile';
-import request from 'umi-request';
+import { request } from '@umijs/max';
 import type { NoticeType, NoticeListParams } from './data.d';
 import { paramsSortable } from '@/utils/utils';
 

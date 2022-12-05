@@ -1,6 +1,6 @@
 import { downLoadXlsx } from '@/utils/downloadFile';
 import { paramsSortable } from '@/utils/utils';
-import request from 'umi-request';
+import { request } from '@umijs/max';
 import type { MenuType, MenuListParams } from './data.d';
 
 // 查询菜单权限列表

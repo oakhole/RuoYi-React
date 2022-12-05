@@ -1,5 +1,5 @@
 import { createIcon } from '@/utils/IconUtil';
-import request from 'umi-request';
+import { request } from '@umijs/max';
 import type { MenuDataItem } from '@umijs/route-utils';
 
 /** 获取当前的用户 GET /api/getUserInfo */

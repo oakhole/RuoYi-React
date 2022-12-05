@@ -1,8 +1,16 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-02 10:16:13
+ * @FilePath: /RuoYi-React/src/pages/account/center/components/ResetPassword/index.tsx
+ * @Description: 账户中心 - 重置密码页面
+ */
 import React from 'react';
 import { Form, message } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import ProForm, { ProFormText } from '@ant-design/pro-form';
-import { useIntl } from 'umi';
+import { ProForm, ProFormText } from '@ant-design/pro-components';
+import { useIntl } from '@umijs/max';
 import { updateUserPwd } from '@/pages/system/user/service';
 
 const ResetPassword: React.FC = () => {

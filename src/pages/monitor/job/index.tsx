@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:53:54
+ * @FilePath: /RuoYi-React/src/pages/monitor/job/index.tsx
+ * @Description: 监控管理 - 定时任务
+ */
 import { PlusOutlined, DownOutlined, FileExcelOutlined, HistoryOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
@@ -5,16 +13,17 @@ import { Popconfirm } from 'antd';
 import { Dropdown, Menu } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, history, useAccess } from 'umi';
+import { useIntl, FormattedMessage, history, useAccess } from '@umijs/max';
 
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { JobType } from './data.d';
 import { getJobList, removeJob, addJob, updateJob, exportJob, runJob } from './service';
 import UpdateForm from './components/edit';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-components';
 
 /**
  * 添加节点
@@ -324,63 +333,61 @@ const JobTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<JobType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="jobId"
-          key="jobList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          toolBarRender={() => [
-            <Button
-              type="text"
-              key="add"
-              hidden={!access.hasPerms('monitor:job:add')}
-              onClick={async () => {
-                setCurrentRow(undefined);
-                setModalVisible(true);
-              }}
-            >
-              <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-            </Button>,
-            <Button
-              type="text"
-              key="log"
-              hidden={!access.hasPerms('monitor:job:add')}
-              onClick={() => {
-                history.push('/monitor/job/log');
-              }}
-            >
-              <HistoryOutlined /> 日志
-            </Button>,
-            <Button
-              type="text"
-              key="export"
-              hidden={!access.hasPerms('monitor:job:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <FileExcelOutlined />{' '}
-              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-            </Button>,
-          ]}
-          request={(params, sort) => getJobList({ ...params }, sort)}
-          columns={columns}
-          rowSelection={{
-            onChange: (_, selectedRows) => {
-              setSelectedRows(selectedRows);
-            },
-          }}
-        />
-      </div>
+    <PageContainer>
+      <ProTable<JobType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="jobId"
+        key="jobList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="text"
+            key="add"
+            hidden={!access.hasPerms('monitor:job:add')}
+            onClick={async () => {
+              setCurrentRow(undefined);
+              setModalVisible(true);
+            }}
+          >
+            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+          </Button>,
+          <Button
+            type="text"
+            key="log"
+            hidden={!access.hasPerms('monitor:job:add')}
+            onClick={() => {
+              history.push('/monitor/job/log');
+            }}
+          >
+            <HistoryOutlined /> 日志
+          </Button>,
+          <Button
+            type="text"
+            key="export"
+            hidden={!access.hasPerms('monitor:job:export')}
+            onClick={async () => {
+              handleExport();
+            }}
+          >
+            <FileExcelOutlined />{' '}
+            <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
+          </Button>,
+        ]}
+        request={(params, sort) => getJobList({ ...params }, sort)}
+        columns={columns}
+        rowSelection={{
+          onChange: (_, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
+        }}
+      />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -448,7 +455,7 @@ const JobTableList: React.FC = () => {
         values={currentRow || {}}
         statusOptions={statusOptions}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

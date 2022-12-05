@@ -1,5 +1,5 @@
 import { GithubOutlined } from '@ant-design/icons';
-import { DefaultFooter } from '@ant-design/pro-layout';
+import { DefaultFooter } from '@ant-design/pro-components';
 export default () => {
   const defaultMessage = 'Based on RuoYi v4.7.0';
   const currentYear = new Date().getFullYear();

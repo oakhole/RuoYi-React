@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Form, Modal, Descriptions } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { JobLogType } from '../data';
 
 export type JobLogFormValueType = Record<string, unknown> & Partial<JobLogType>;

@@ -1,8 +1,16 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 21:22:35
+ * @FilePath: /RuoYi-React/src/pages/monitor/server/index.tsx
+ * @Description: 监控管理 - 服务监控
+ */
 import React, { useEffect, useState } from 'react';
 import { getServerInfo } from './service';
 import { Card, Col, Row, Table } from 'antd';
 import styles from './style.less';
-import { FormattedMessage } from 'umi';
+import { FormattedMessage } from '@umijs/max';
 import type {
   CpuRowType,
   MemRowType,
@@ -10,7 +18,7 @@ import type {
   DiskInfoType,
   JvmInfoType,
 } from './data';
-import { PageContainer } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import type { ColumnsType } from 'antd/lib/table';
 
 const columns = [
@@ -213,7 +221,7 @@ const ServerInfo: React.FC = () => {
   }, []);
 
   return (
-    <PageContainer breadcrumb={undefined}>
+    <PageContainer>
       <Row gutter={[24, 24]}>
         <Col span={12}>
           <Card title="CPU" className={styles.card}>

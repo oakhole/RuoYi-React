@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-21 09:53:36
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-11-21 10:16:34
+ * @LastEditTime: 2022-12-05 21:27:53
  * @FilePath: /RuoYi-React/src/pages/system/user/index.tsx
  * @Description: 用户列表
  */
@@ -10,10 +10,11 @@ import { PlusOutlined, FileExcelOutlined, UploadOutlined } from '@ant-design/ico
 import type { FormInstance } from 'antd';
 import { Button, message, Modal, Row, Col, Popconfirm, Badge } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, useAccess } from 'umi';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
+import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { FooterToolbar } from '@ant-design/pro-components';
 import Card from 'antd/es/card';
 import type { UserType } from './data.d';
 import {
@@ -168,7 +169,7 @@ const UserTableList: React.FC = () => {
   const intl = useIntl();
 
   useEffect(() => {
-    getDict('sys_user_sex').then((res) => {
+    getDict('sys_user_sex').then((res: { code: number; data: any[] }) => {
       if (res.code === 200) {
         const opts = {};
         res.data.forEach((item: any) => {
@@ -177,7 +178,7 @@ const UserTableList: React.FC = () => {
         setSexOptions(opts);
       }
     });
-    getDict('sys_normal_disable').then((res) => {
+    getDict('sys_normal_disable').then((res: { code: number; data: any[] }) => {
       if (res.code === 200) {
         const opts = {};
         res.data.forEach((item: any) => {
@@ -228,7 +229,7 @@ const UserTableList: React.FC = () => {
       dataIndex: 'status',
       valueType: 'select',
       valueEnum: statusOptions,
-      render: (_, record) => (
+      render: (_: any, record: { status: string }) => (
         <Badge
           status={record.status === '0' ? 'success' : 'error'}
           text={statusOptions[record.status]}
@@ -241,9 +242,20 @@ const UserTableList: React.FC = () => {
       valueType: 'dateRange',
       sorter: true,
       defaultSortOrder: 'descend',
-      render: (_, record) => <span>{record.createTime}</span>,
+      render: (
+        _: any,
+        record: {
+          createTime:
+            | boolean
+            | React.ReactChild
+            | React.ReactFragment
+            | React.ReactPortal
+            | null
+            | undefined;
+        },
+      ) => <span>{record.createTime}</span>,
       search: {
-        transform: (value) => {
+        transform: (value: any[]) => {
           return {
             'params[beginTime]': value[0],
             'params[endTime]': value[1],
@@ -255,7 +267,7 @@ const UserTableList: React.FC = () => {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
       valueType: 'option',
-      render: (_, record) => [
+      render: (_: any, record: any) => [
         <Button
           type="link"
           size="small"
@@ -283,7 +295,7 @@ const UserTableList: React.FC = () => {
                 }),
               );
             };
-            fetchUserInfo(record.userId);
+            fetchUserInfo(record?.userId);
             getDeptTreeList({}).then((treeData) => {
               setDeptTree(treeData);
             });
@@ -335,7 +347,7 @@ const UserTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
+    <PageContainer>
       <Row gutter={[16, 24]}>
         <Col lg={6} md={24}>
           <Card bordered={false}>
@@ -433,10 +445,12 @@ const UserTableList: React.FC = () => {
                 <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
               </Button>,
             ]}
-            request={(params, sort) => getUserList({ ...params, deptId: selectDept.key }, sort)}
+            request={(params: any, sort: any) =>
+              getUserList({ ...params, deptId: selectDept.key }, sort)
+            }
             columns={columns}
             rowSelection={{
-              onChange: (_, selectedRows) => {
+              onChange: (_: any, selectedRows: React.SetStateAction<UserType[]>) => {
                 setSelectedRows(selectedRows);
               },
             }}
@@ -528,7 +542,7 @@ const UserTableList: React.FC = () => {
         resetPwdModalVisible={resetPwdModalVisible}
         values={currentRow || {}}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

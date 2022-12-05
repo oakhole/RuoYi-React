@@ -1,14 +1,23 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-02 10:14:26
+ * @FilePath: /RuoYi-React/src/pages/tool/gen/Form.tsx
+ * @Description: 代码生成 - 表单
+ */
 import React, { useEffect, useRef, useState } from 'react';
-import type { ProFormInstance } from '@ant-design/pro-form';
-import ProForm, {
+import type { ProFormInstance } from '@ant-design/pro-components';
+import {
+  ProForm,
   ProFormText,
   ProFormTextArea,
   DrawerForm,
   ProFormSelect,
   ProFormTreeSelect,
   ProFormRadio,
-} from '@ant-design/pro-form';
-import { useIntl, FormattedMessage } from 'umi';
+} from '@ant-design/pro-components';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { GenTable, GenTableColumn } from './data.d';
 import { Col, Divider, Row, Segmented, Skeleton, Tabs } from 'antd';
 import { getMenuList } from '@/pages/system/menu/service';
@@ -17,8 +26,8 @@ import type { DataNode } from 'antd/lib/tree';
 import { getGenTable } from './service';
 import type { DictDataType } from '@/pages/system/dictData/data';
 import { optionselect } from '@/pages/system/dict/service';
-import type { EditableFormInstance, ProColumns } from '@ant-design/pro-table';
-import { EditableProTable } from '@ant-design/pro-table';
+import type { EditableFormInstance, ProColumns } from '@ant-design/pro-components';
+import { EditableProTable } from '@ant-design/pro-components';
 import { ApartmentOutlined, BranchesOutlined, TableOutlined } from '@ant-design/icons';
 import type { SegmentedValue } from 'antd/lib/segmented';
 

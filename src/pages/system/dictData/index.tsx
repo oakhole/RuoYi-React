@@ -1,14 +1,22 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:51:48
+ * @FilePath: /RuoYi-React/src/pages/system/dictData/index.tsx
+ * @Description: 字典 - 数据页面
+ */
 import { PlusOutlined, FileExcelOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
 import { Popconfirm } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, history, useAccess } from 'umi';
+import { useIntl, FormattedMessage, history, useAccess, useParams } from '@umijs/max';
 
-import { FooterToolbar, PageContainer } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import { FooterToolbar, PageContainer } from '@ant-design/pro-components';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { DictDataType } from './data.d';
 import {
   getDictDataList,
@@ -140,9 +148,9 @@ const DictDataTableList: React.FC<DictDataProps> = (props) => {
 
   /** 国际化配置 */
   const intl = useIntl();
+  const { id } = useParams() as DictTypeArgs;
 
   useEffect(() => {
-    const { id } = props.match?.params as DictTypeArgs;
     if (id === undefined) {
       history.push('/system/dict');
     }
@@ -323,64 +331,62 @@ const DictDataTableList: React.FC<DictDataProps> = (props) => {
       title="字典数据"
       breadcrumb={undefined}
       onBack={() => {
-        history.goBack();
+        history.back();
       }}
     >
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<DictDataType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="dictCode"
-          key="dictDataList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          toolBarRender={() => [
-            <Button
-              type="text"
-              key="add"
-              hidden={!access.hasPerms('system:dictData:add')}
-              onClick={async () => {
-                setCurrentRow(undefined);
-                setModalVisible(true);
-              }}
-            >
-              <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-            </Button>,
-            <Button
-              type="text"
-              key="export"
-              hidden={!access.hasPerms('system:dictData:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <FileExcelOutlined />{' '}
-              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-            </Button>,
-          ]}
-          request={async (params, sort) => {
-            if (dictType.length === 0) {
-              return {
-                data: [],
-                total: 0,
-                success: true,
-              };
-            }
-            return getDictDataList({ dictType, ...params }, sort);
-          }}
-          columns={columns}
-          rowSelection={{
-            onChange: (_, selectedRows) => {
-              setSelectedRows(selectedRows);
-            },
-          }}
-        />
-      </div>
+      <ProTable<DictDataType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="dictCode"
+        key="dictDataList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="text"
+            key="add"
+            hidden={!access.hasPerms('system:dictData:add')}
+            onClick={async () => {
+              setCurrentRow(undefined);
+              setModalVisible(true);
+            }}
+          >
+            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+          </Button>,
+          <Button
+            type="text"
+            key="export"
+            hidden={!access.hasPerms('system:dictData:export')}
+            onClick={async () => {
+              handleExport();
+            }}
+          >
+            <FileExcelOutlined />{' '}
+            <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
+          </Button>,
+        ]}
+        request={async (params, sort) => {
+          if (dictType.length === 0) {
+            return {
+              data: [],
+              total: 0,
+              success: true,
+            };
+          }
+          return getDictDataList({ dictType, ...params }, sort);
+        }}
+        columns={columns}
+        rowSelection={{
+          onChange: (_, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
+        }}
+      />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={

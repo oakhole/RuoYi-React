@@ -1,6 +1,14 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-11-30 22:00:08
+ * @FilePath: /RuoYi-React/src/services/ant-design-pro/api.ts
+ * @Description: 全局 API 服务
+ */
 // @ts-ignore
 /* eslint-disable */
-import { request } from 'umi';
+import { request } from '@umijs/max';
 
 /** 获取当前的用户 GET /api/currentUser */
 export async function currentUser(options?: { [key: string]: any }) {
@@ -23,7 +31,7 @@ export async function outLogin(options?: { [key: string]: any }) {
 }
 
 /** 登录接口 POST /api/login/account */
-export async function login(body: API.LoginParams, options?: { [key: string]: any }) {
+export async function login(body: any, options?: { [key: string]: any }) {
   return request<API.LoginResult>('/api/login', {
     method: 'POST',
     headers: {

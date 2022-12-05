@@ -1,12 +1,21 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:50:02
+ * @FilePath: /RuoYi-React/src/pages/monitor/operlog/index.tsx
+ * @Description: 系统管理 - 日志管理 - 操作日志
+ */
 import { ExclamationCircleOutlined, FileExcelOutlined, ClearOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, useAccess } from 'umi';
+import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
 
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { OperlogType } from './data.d';
 import {
   getOperlogList,
@@ -18,7 +27,7 @@ import {
 } from './service';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-components';
 
 const { confirm } = Modal;
 
@@ -321,63 +330,61 @@ const OperlogTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<OperlogType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="operId"
-          key="operlogList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          toolBarRender={() => [
-            <Button
-              type="text"
-              danger
-              key="clear"
-              hidden={!access.hasPerms('monitor:operlog:remove')}
-              onClick={async () => {
-                confirm({
-                  title: '是否确认清空所有登录日志数据项?',
-                  icon: <ExclamationCircleOutlined />,
-                  content: '请谨慎操作',
-                  async onOk() {
-                    handleRemoveAll();
-                    actionRef.current?.reloadAndRest?.();
-                  },
-                  onCancel() {},
-                });
-              }}
-            >
-              <ClearOutlined />{' '}
-              <FormattedMessage id="pages.searchTable.clear" defaultMessage="清空" />
-            </Button>,
-            <Button
-              type="text"
-              key="export"
-              hidden={!access.hasPerms('monitor:operlog:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <FileExcelOutlined />{' '}
-              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-            </Button>,
-          ]}
-          request={(params, sort) => getOperlogList({ ...params }, sort)}
-          columns={columns}
-          rowSelection={{
-            onChange: (_, selectedRows) => {
-              setSelectedRows(selectedRows);
-            },
-          }}
-        />
-      </div>
+    <PageContainer>
+      <ProTable<OperlogType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="operId"
+        key="operlogList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="text"
+            danger
+            key="clear"
+            hidden={!access.hasPerms('monitor:operlog:remove')}
+            onClick={async () => {
+              confirm({
+                title: '是否确认清空所有登录日志数据项?',
+                icon: <ExclamationCircleOutlined />,
+                content: '请谨慎操作',
+                async onOk() {
+                  handleRemoveAll();
+                  actionRef.current?.reloadAndRest?.();
+                },
+                onCancel() {},
+              });
+            }}
+          >
+            <ClearOutlined />{' '}
+            <FormattedMessage id="pages.searchTable.clear" defaultMessage="清空" />
+          </Button>,
+          <Button
+            type="text"
+            key="export"
+            hidden={!access.hasPerms('monitor:operlog:export')}
+            onClick={async () => {
+              handleExport();
+            }}
+          >
+            <FileExcelOutlined />{' '}
+            <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
+          </Button>,
+        ]}
+        request={(params, sort) => getOperlogList({ ...params }, sort)}
+        columns={columns}
+        rowSelection={{
+          onChange: (_, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
+        }}
+      />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -438,7 +445,7 @@ const OperlogTableList: React.FC = () => {
         operatorTypeOptions={operatorTypeOptions}
         statusOptions={statusOptions}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
-import { ProFormDigit, ProFormText, ProFormRadio, ProFormTimePicker } from '@ant-design/pro-form';
+import {
+  ProFormDigit,
+  ProFormText,
+  ProFormRadio,
+  ProFormTimePicker,
+} from '@ant-design/pro-components';
 import { Form, Modal, Row, Col } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { LogininforType } from '../data.d';
 
 export type LogininforFormValueType = Record<string, unknown> & Partial<LogininforType>;

@@ -1,16 +1,25 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:50:40
+ * @FilePath: /RuoYi-React/src/pages/monitor/logininfor/index.tsx
+ * @Description: 系统管理 - 日志管理 - 登录日志
+ */
 import { ExclamationCircleOutlined, ClearOutlined, FileExcelOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, useAccess } from 'umi';
+import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
 
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { LogininforType } from './data.d';
 import { getLogininforList, removeLogininfor, exportLogininfor, cleanLogininfor } from './service';
 import { getDict } from '@/pages/system/dict/service';
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-components';
 
 const { confirm } = Modal;
 
@@ -181,55 +190,53 @@ const LogininforTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<LogininforType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="infoId"
-          key="logininforList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          toolBarRender={() => [
-            <Button
-              type="text"
-              key="clear"
-              danger
-              hidden={!access.hasPerms('monitor:logininfor:remove')}
-              onClick={async () => {
-                handleRemoveAll();
-                actionRef.current?.reloadAndRest?.();
-              }}
-            >
-              <ClearOutlined />{' '}
-              <FormattedMessage id="pages.searchTable.clear" defaultMessage="清空" />
-            </Button>,
-            <Button
-              type="text"
-              key="export"
-              hidden={!access.hasPerms('monitor:logininfor:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <FileExcelOutlined />{' '}
-              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-            </Button>,
-          ]}
-          request={(params, sort) => getLogininforList({ ...params }, sort)}
-          columns={columns}
-          rowSelection={{
-            onChange: (_, selectedRows) => {
-              setSelectedRows(selectedRows);
-            },
-          }}
-        />
-      </div>
+    <PageContainer>
+      <ProTable<LogininforType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="infoId"
+        key="logininforList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="text"
+            key="clear"
+            danger
+            hidden={!access.hasPerms('monitor:logininfor:remove')}
+            onClick={async () => {
+              handleRemoveAll();
+              actionRef.current?.reloadAndRest?.();
+            }}
+          >
+            <ClearOutlined />{' '}
+            <FormattedMessage id="pages.searchTable.clear" defaultMessage="清空" />
+          </Button>,
+          <Button
+            type="text"
+            key="export"
+            hidden={!access.hasPerms('monitor:logininfor:export')}
+            onClick={async () => {
+              handleExport();
+            }}
+          >
+            <FileExcelOutlined />{' '}
+            <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
+          </Button>,
+        ]}
+        request={(params, sort) => getLogininforList({ ...params }, sort)}
+        columns={columns}
+        rowSelection={{
+          onChange: (_, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
+        }}
+      />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -264,7 +271,7 @@ const LogininforTableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
-    </GridContent>
+    </PageContainer>
   );
 };
 

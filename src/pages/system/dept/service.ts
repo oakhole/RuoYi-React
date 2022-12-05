@@ -1,5 +1,5 @@
 import { downLoadXlsx } from '@/utils/downloadFile';
-import request from 'umi-request';
+import { request } from '@umijs/max';
 import { formatTreeSelectData, paramsSortable } from '@/utils/utils';
 import type { DataNode } from 'antd/lib/tree';
 import type { DeptType, DeptListParams } from './data.d';

@@ -1,13 +1,22 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-02 10:15:18
+ * @FilePath: /RuoYi-React/src/pages/system/role/components/edit.tsx
+ * @Description: 角色编辑页面
+ */
 import React, { useEffect, useState } from 'react';
-import ProForm, {
+import {
+  ProForm,
   ProFormDigit,
   ProFormText,
   ProFormRadio,
   ProFormTextArea,
   DrawerForm,
-} from '@ant-design/pro-form';
+} from '@ant-design/pro-components';
 import { Form, Row, Col, Tree } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { RoleType } from '../data.d';
 import type { DataNode } from 'antd/lib/tree';
 

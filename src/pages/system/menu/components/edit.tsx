@@ -6,9 +6,9 @@ import {
   ProFormSelect,
   ProFormTreeSelect,
   DrawerForm,
-} from '@ant-design/pro-form';
+} from '@ant-design/pro-components';
 import { Form, Modal } from 'antd';
-import { useIntl, FormattedMessage, getLocale } from 'umi';
+import { useIntl, FormattedMessage, getLocale } from '@umijs/max';
 import type { DataNode } from 'antd/lib/tree';
 import type { MenuType } from '../data.d';
 import IconSelector from '@/components/IconSelector';

@@ -1,13 +1,21 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:53:34
+ * @FilePath: /RuoYi-React/src/pages/monitor/online/index.tsx
+ * @Description: 监控管理 - 在线用户
+ */
 import type { FormInstance } from 'antd';
 import { Popconfirm } from 'antd';
 import { Button, message } from 'antd';
 import React, { useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, useAccess } from 'umi';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { OnlineUserType } from './data.d';
 import { getOnlineUserList, forceLogout } from './service';
-import { GridContent } from '@ant-design/pro-layout';
 import moment from 'moment';
 
 const handleRemoveOne = async (selectedRow: OnlineUserType) => {
@@ -126,25 +134,23 @@ const OnlineUserTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<OnlineUserType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="infoId"
-          key="logininforList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          request={(params, sort) => getOnlineUserList({ ...params }, sort)}
-          columns={columns}
-        />
-      </div>
-    </GridContent>
+    <PageContainer>
+      <ProTable<OnlineUserType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="infoId"
+        key="logininforList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        request={(params, sort) => getOnlineUserList({ ...params }, sort)}
+        columns={columns}
+      />
+    </PageContainer>
   );
 };
 

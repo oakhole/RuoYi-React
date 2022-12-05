@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { useModel } from 'umi';
-import { ProBreadcrumb } from '@ant-design/pro-layout';
+import { useModel } from '@umijs/max';
+import { ProBreadcrumb } from '@ant-design/pro-components';
 
 export type HeaderContent = {
   collapse?: boolean;

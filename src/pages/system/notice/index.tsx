@@ -1,15 +1,23 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:49:24
+ * @FilePath: /RuoYi-React/src/pages/system/notice/index.tsx
+ * @Description: 系统管理 - 公告管理
+ */
 import { PlusOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
 import { Popconfirm } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useAccess } from 'umi';
-import { useIntl, FormattedMessage } from 'umi';
+import { useAccess } from '@umijs/max';
+import { useIntl, FormattedMessage } from '@umijs/max';
 
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import { FooterToolbar, PageContainer } from '@ant-design/pro-components';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { NoticeType } from './data.d';
 import { getNoticeList, removeNotice, addNotice, updateNotice } from './service';
 import UpdateForm from './components/edit';
@@ -235,42 +243,40 @@ const NoticeTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<NoticeType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="noticeId"
-          key="noticeList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          toolBarRender={() => [
-            <Button
-              type="text"
-              key="add"
-              hidden={!access.hasPerms('system:notice:add')}
-              onClick={async () => {
-                setCurrentRow(undefined);
-                setModalVisible(true);
-              }}
-            >
-              <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-            </Button>,
-          ]}
-          request={(params, sort) => getNoticeList({ ...params }, sort)}
-          columns={columns}
-          rowSelection={{
-            onChange: (_, selectedRows) => {
-              setSelectedRows(selectedRows);
-            },
-          }}
-        />
-      </div>
+    <PageContainer>
+      <ProTable<NoticeType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="noticeId"
+        key="noticeList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="text"
+            key="add"
+            hidden={!access.hasPerms('system:notice:add')}
+            onClick={async () => {
+              setCurrentRow(undefined);
+              setModalVisible(true);
+            }}
+          >
+            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+          </Button>,
+        ]}
+        request={(params, sort) => getNoticeList({ ...params }, sort)}
+        columns={columns}
+        rowSelection={{
+          onChange: (_, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
+        }}
+      />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -330,7 +336,7 @@ const NoticeTableList: React.FC = () => {
         noticeTypeOptions={noticeTypeOptions}
         statusOptions={statusOptions}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

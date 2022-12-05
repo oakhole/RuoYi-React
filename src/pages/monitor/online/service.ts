@@ -1,4 +1,4 @@
-import request from 'umi-request';
+import { request } from '@umijs/max';
 import { paramsSortable } from '@/utils/utils';
 
 // 查询在线用户列表

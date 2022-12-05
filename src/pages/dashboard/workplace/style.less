@@ -11,11 +11,13 @@
 // ------------------------
 .clearfix() {
   zoom: 1;
+
   &::before,
   &::after {
     display: table;
     content: ' ';
   }
+
   &::after {
     clear: both;
     height: 0;
@@ -26,9 +28,11 @@
 
 .activitiesList {
   padding: 0 24px 8px 24px;
+
   .username {
     color: @text-color;
   }
+
   .event {
     font-weight: normal;
   }
@@ -36,8 +40,10 @@
 
 .pageHeaderContent {
   display: flex;
+
   .avatar {
     flex: 0 1 72px;
+
     & > span {
       display: block;
       width: 72px;
@@ -45,6 +51,7 @@
       border-radius: 72px;
     }
   }
+
   .content {
     position: relative;
     top: 4px;
@@ -52,6 +59,7 @@
     margin-left: 24px;
     color: @text-color-secondary;
     line-height: 22px;
+
     .contentTitle {
       margin-bottom: 12px;
       color: @heading-color;
@@ -67,26 +75,31 @@
 
   float: right;
   white-space: nowrap;
+
   .statItem {
     position: relative;
     display: inline-block;
     padding: 0 32px;
+
     > p:first-child {
       margin-bottom: 4px;
       color: @text-color-secondary;
       font-size: @font-size-base;
       line-height: 22px;
     }
+
     > p {
       margin: 0;
       color: @heading-color;
       font-size: 30px;
       line-height: 38px;
+
       > span {
         color: @text-color-secondary;
         font-size: 20px;
       }
     }
+
     &::after {
       position: absolute;
       top: 8px;
@@ -96,8 +109,10 @@
       background-color: @border-color-split;
       content: '';
     }
+
     &:last-child {
       padding-right: 0;
+
       &::after {
         display: none;
       }
@@ -113,12 +128,14 @@
     color: @text-color;
     transition: all 0.3s;
     .textOverflow();
+
     .member {
       margin-left: 12px;
       font-size: @font-size-base;
       line-height: 24px;
       vertical-align: top;
     }
+
     &:hover {
       color: @primary-color;
     }
@@ -134,8 +151,10 @@
       line-height: 22px;
     }
   }
+
   .cardTitle {
     font-size: 0;
+
     a {
       display: inline-block;
       height: 24px;
@@ -144,14 +163,17 @@
       font-size: @font-size-base;
       line-height: 24px;
       vertical-align: top;
+
       &:hover {
         color: @primary-color;
       }
     }
   }
+
   .projectGrid {
     width: 33.33%;
   }
+
   .projectItemContent {
     display: flex;
     height: 20px;
@@ -160,15 +182,18 @@
     font-size: 12px;
     line-height: 20px;
     .textOverflow();
+
     a {
       display: inline-block;
       flex: 1 1 0;
       color: @text-color-secondary;
       .textOverflow();
+
       &:hover {
         color: @primary-color;
       }
     }
+
     .datetime {
       flex: 0 0 auto;
       float: right;
@@ -185,11 +210,14 @@
   .activeCard {
     margin-bottom: 24px;
   }
+
   .members {
     margin-bottom: 0;
   }
+
   .extraContent {
     margin-left: -44px;
+
     .statItem {
       padding: 0 16px;
     }
@@ -200,15 +228,19 @@
   .activeCard {
     margin-bottom: 24px;
   }
+
   .members {
     margin-bottom: 0;
   }
+
   .extraContent {
     float: none;
     margin-right: 0;
+
     .statItem {
       padding: 0 16px;
       text-align: left;
+
       &::after {
         display: none;
       }
@@ -220,6 +252,7 @@
   .extraContent {
     margin-left: -16px;
   }
+
   .projectList {
     .projectGrid {
       width: 50%;
@@ -230,10 +263,12 @@
 @media screen and (max-width: @screen-sm) {
   .pageHeaderContent {
     display: block;
+
     .content {
       margin-left: 0;
     }
   }
+
   .extraContent {
     .statItem {
       float: none;

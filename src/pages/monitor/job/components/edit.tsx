@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
-import { ProFormDigit, ProFormText, ProFormTextArea, ProFormRadio } from '@ant-design/pro-form';
+import {
+  ProFormDigit,
+  ProFormText,
+  ProFormTextArea,
+  ProFormRadio,
+} from '@ant-design/pro-components';
 import { Form, Modal, Row, Col } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { JobType } from '../data.d';
 
 export type JobFormValueType = Record<string, unknown> & Partial<JobType>;

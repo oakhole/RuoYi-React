@@ -1,4 +1,12 @@
-﻿export default [
+﻿/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:02
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 21:20:29
+ * @FilePath: /RuoYi-React/config/routes.ts
+ * @Description: 路由配置
+ */
+export default [
   {
     path: '/',
     redirect: '/dashboard/workplace',
@@ -44,7 +52,6 @@
   {
     name: 'dashboard',
     path: '/dashboard',
-    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/dashboard',
@@ -55,31 +62,24 @@
         name: 'workplace',
         path: '/dashboard/workplace',
         component: 'dashboard/workplace',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.dashboard.monitor',
         name: 'monitor',
         path: '/dashboard/monitor',
         component: 'dashboard/monitor',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.dashboard.analysis',
         name: 'analysis',
         path: '/dashboard/analysis',
         component: 'dashboard/analysis',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
     ],
   },
   {
     name: 'system',
     path: '/system',
-    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/system',
@@ -90,77 +90,58 @@
         name: 'user',
         path: '/system/user',
         component: 'system/user',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.role',
         name: 'role',
         path: '/system/role',
         component: 'system/role',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.menu',
         name: 'menu',
         path: '/system/menu',
         component: 'system/menu',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.dept',
         name: 'dept',
         path: '/system/dept',
         component: 'system/dept',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.user',
         name: 'post',
         path: '/system/post',
         component: 'system/post',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.dict',
         name: 'dict',
         path: '/system/dict',
         component: 'system/dict',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.dict.data',
         name: 'dictData',
-        path: '/system/dict/data/:id?',
+        path: '/system/dict/data/:id',
         component: 'system/dictData',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.config',
         name: 'config',
         path: '/system/config',
         component: 'system/config',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.system.notice',
         name: 'notice',
         path: '/system/notice',
         component: 'system/notice',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         name: 'log',
         path: '/system/log',
-        component: '@/layouts/TabsLayout',
         routes: [
           {
             path: '/system/log',
@@ -171,16 +152,12 @@
             name: 'operLog',
             path: '/system/log/operlog',
             component: 'monitor/operlog',
-            wrappers: ['@/components/KeepAlive'],
-            keppAlive: true,
           },
           {
             title: 'menu.system.logininfor',
             name: 'logininfor',
             path: '/system/log/logininfor',
             component: 'monitor/logininfor',
-            wrappers: ['@/components/KeepAlive'],
-            keppAlive: true,
           },
         ],
       },
@@ -189,7 +166,6 @@
   {
     name: 'monitor',
     path: '/monitor',
-    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/monitor',
@@ -200,55 +176,42 @@
         name: 'online',
         path: '/monitor/online',
         component: 'monitor/online',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.monitor.schedule',
         name: 'job',
         path: '/monitor/job',
         component: 'monitor/job',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.monitor.schedule.log',
         name: 'job',
-        path: '/monitor/job/log/:id?',
+        path: '/monitor/job/log/:id',
         component: 'monitor/joblog',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.monitor.druid',
         name: 'druid',
         path: '/monitor/druid',
         component: 'monitor/druid',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.monitor.server',
         name: 'server',
         path: '/monitor/server',
         component: 'monitor/server',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.monitor.cache',
         name: 'cache',
         path: '/monitor/cache',
         component: 'monitor/cache',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
     ],
   },
   {
     name: 'tool',
     path: '/tool',
-    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/tool',
@@ -259,24 +222,18 @@
         name: 'build',
         path: '/tool/build',
         component: 'tool/design',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.tool.code-gen',
         name: 'gen',
         path: '/tool/gen',
         component: 'tool/gen',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
       {
         title: 'menu.tool.open-api',
         name: 'swagger',
         path: '/tool/swagger',
         component: 'tool/swagger',
-        wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
       },
     ],
   },

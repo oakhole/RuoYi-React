@@ -1,4 +1,4 @@
-import { request } from 'umi';
+import { request } from '@umijs/max';
 import type { ListItemDataType } from './data.d';
 
 export async function queryCurrentUserInfo(): Promise<{ data: API.GetUserInfoResult }> {

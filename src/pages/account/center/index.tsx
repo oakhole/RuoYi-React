@@ -8,14 +8,14 @@ import {
 } from '@ant-design/icons';
 import { Card, Col, Divider, List, Row } from 'antd';
 import React, { useState } from 'react';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 import type { tabKeyType } from './data.d';
 import { queryCurrentUserInfo } from './service';
 import styles from './Center.less';
 import BaseInfo from './components/BaseInfo';
 import ResetPassword from './components/ResetPassword';
 import AvatarCropper from './components/AvatarCropper';
-import { GridContent } from '@ant-design/pro-layout';
+import { GridContent } from '@ant-design/pro-components';
 import PageLoading from '@/pages/dashboard/analysis/components/PageLoading';
 
 const operationTabList = [

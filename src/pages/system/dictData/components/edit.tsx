@@ -5,9 +5,9 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-form';
+} from '@ant-design/pro-components';
 import { Form, Modal } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { DictDataType } from '../data.d';
 
 export type DictDataFormValueType = Record<string, unknown> & Partial<DictDataType>;

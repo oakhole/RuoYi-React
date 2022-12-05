@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-01 17:18:11
+ * @FilePath: /RuoYi-React/src/pages/system/user/components/edit.tsx
+ * @Description: 用户编辑页面
+ */
 import React, { useEffect, useState } from 'react';
 import {
   ProFormDigit,
@@ -6,9 +14,9 @@ import {
   ProFormTextArea,
   ProFormTreeSelect,
   DrawerForm,
-} from '@ant-design/pro-form';
+} from '@ant-design/pro-components';
 import { Form, Row, Col } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { UserType } from '../data.d';
 import type { DataNode } from 'antd/lib/tree';
 

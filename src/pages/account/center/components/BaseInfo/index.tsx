@@ -1,8 +1,15 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-02 09:46:07
+ * @FilePath: /RuoYi-React/src/pages/account/center/components/BaseInfo/index.tsx
+ * @Description: 用户中心 - 个人信息
+ */
 import React from 'react';
 import { Form, message, Row } from 'antd';
-import { FormattedMessage } from 'react-intl';
-import ProForm, { ProFormRadio, ProFormText } from '@ant-design/pro-form';
-import { useIntl } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
+import { ProForm, ProFormRadio, ProFormText } from '@ant-design/pro-components';
 import { updateUserProfile } from '@/pages/system/user/service';
 
 export type BaseInfoProps = {

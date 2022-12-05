@@ -5,8 +5,8 @@ import {
   ProFormRadio,
   ProFormTextArea,
   DrawerForm,
-} from '@ant-design/pro-form';
-import { useIntl, FormattedMessage } from 'umi';
+} from '@ant-design/pro-components';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { ${ClassName} } from './data.d';
 
 export type ${ClassName}FormValueType = Record<string, unknown> & Partial<${ClassName}>;

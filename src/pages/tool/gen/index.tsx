@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 21:24:41
+ * @FilePath: /RuoYi-React/src/pages/tool/gen/index.tsx
+ * @Description: 工具 - 代码生成
+ */
 import {
   CheckOutlined,
   CopyOutlined,
@@ -7,13 +15,13 @@ import {
 } from '@ant-design/icons';
 import { Button, Card, Drawer, Dropdown, Menu, message, Modal, Popconfirm } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
-import { FormattedMessage, useAccess, useIntl } from 'umi';
+import { FormattedMessage, useAccess, useIntl } from '@umijs/max';
 
-import { FooterToolbar, PageContainer } from '@ant-design/pro-layout';
-import type { ActionType, ProColumns } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
-import type { ProFormInstance } from '@ant-design/pro-form';
-import { DrawerForm } from '@ant-design/pro-form';
+import { FooterToolbar, PageContainer } from '@ant-design/pro-components';
+import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import type { ProFormInstance } from '@ant-design/pro-components';
+import { DrawerForm } from '@ant-design/pro-components';
 import {
   addGenTable,
   exportGenTable,
@@ -269,7 +277,7 @@ const GenTableTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer breadcrumb={undefined} title={false}>
+    <PageContainer>
       <ProTable<GenTable>
         headerTitle={'数据库表代码生成'}
         actionRef={actionRef}

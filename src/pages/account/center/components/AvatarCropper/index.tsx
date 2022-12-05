@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Row, Col, Button, Space, Upload, message } from 'antd';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 import 'cropperjs/dist/cropper.css';
 import { Cropper } from 'react-cropper';
 import { uploadAvatar } from '@/pages/system/user/service';

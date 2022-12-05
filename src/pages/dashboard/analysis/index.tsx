@@ -1,8 +1,16 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 21:26:37
+ * @FilePath: /RuoYi-React/src/pages/dashboard/analysis/index.tsx
+ * @Description: 分析页
+ */
 import type { FC } from 'react';
 import { Suspense, useState } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Col, Dropdown, Menu, Row } from 'antd';
-import { GridContent } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type moment from 'moment';
@@ -11,7 +19,7 @@ import SalesCard from './components/SalesCard';
 import TopSearch from './components/TopSearch';
 import ProportionSales from './components/ProportionSales';
 import OfflineData from './components/OfflineData';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 
 import { fakeChartData } from './service';
 import PageLoading from './components/PageLoading';
@@ -99,7 +107,7 @@ const Analysis: FC<AnalysisProps> = () => {
   const activeKey = currentTabKey || (data?.offlineData[0] && data?.offlineData[0].name) || '';
 
   return (
-    <GridContent>
+    <PageContainer>
       <>
         <Suspense fallback={<PageLoading />}>
           <IntroduceRow loading={loading} visitData={data?.visitData || []} />
@@ -155,7 +163,7 @@ const Analysis: FC<AnalysisProps> = () => {
           />
         </Suspense>
       </>
-    </GridContent>
+    </PageContainer>
   );
 };
 

@@ -1,9 +1,17 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 21:23:07
+ * @FilePath: /RuoYi-React/src/pages/monitor/cache/index.tsx
+ * @Description: 监控管理 - 缓存监控
+ */
 import React, { useEffect, useState } from 'react';
 import { getCacheInfo } from './service';
 import { Card, Col, Row, Table } from 'antd';
 import styles from './index.less';
 import type { CacheInfoResponseType } from './data';
-import { PageContainer } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import { Donut, Gauge } from '@ant-design/charts';
 
 const columns = [
@@ -119,7 +127,7 @@ const CacheInfo: React.FC = () => {
   };
 
   return (
-    <PageContainer breadcrumb={undefined}>
+    <PageContainer>
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <Card title="基本信息" className={styles.card}>

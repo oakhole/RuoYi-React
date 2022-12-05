@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-01 18:25:07
+ * @FilePath: /RuoYi-React/src/pages/user/Login/index.tsx
+ * @Description: 登录页面
+ */
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -9,13 +17,14 @@ import {
 } from '@ant-design/icons';
 import { Alert, Space, message, Tabs, Input, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
-import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import { Link, history, useModel } from 'umi';
+import { ProForm, ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
+import { Link, history, useModel } from '@umijs/max';
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha, getCaptcha } from '@/services/ant-design-pro/login';
 import styles from './index.less';
 import Col from 'antd/es/grid/col';
+import { parse } from 'query-string';
 
 const LoginMessage: React.FC<{
   content?: string;
@@ -60,7 +69,7 @@ const Login: React.FC = () => {
     const userInfo = await initialState?.fetchUserInfo?.();
 
     if (userInfo) {
-      await setInitialState((s) => ({ ...s, currentUser: userInfo }));
+      await setInitialState((s: any) => ({ ...s, currentUser: userInfo }));
     }
   };
 
@@ -81,7 +90,7 @@ const Login: React.FC = () => {
         await fetchUserInfo();
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
-        const { query } = history.location;
+        const query = parse(history.location.search);
         const { redirect } = query as {
           redirect: string;
         };
@@ -124,7 +133,7 @@ const Login: React.FC = () => {
                   searchConfig: {
                     submitText: '登录',
                   },
-                  render: (_, dom) => dom.pop(),
+                  render: (_: any, dom: any[]) => dom.pop(),
                   submitButtonProps: {
                     loading: submitting,
                     size: 'large',
@@ -137,15 +146,19 @@ const Login: React.FC = () => {
                     },
                   },
                 }}
-                onFinish={async (values) => {
+                onFinish={async (values: API.LoginParams) => {
                   await handleSubmit(values as API.LoginParams);
                 }}
                 isKeyPressSubmit={true}
               >
-                <Tabs activeKey={type} onChange={setType}>
-                  <Tabs.TabPane key="account" tab={'账户密码登录'} />
-                  <Tabs.TabPane key="mobile" tab={'手机号登录'} style={{ color: 'white' }} />
-                </Tabs>
+                <Tabs
+                  activeKey={type}
+                  onChange={setType}
+                  items={[
+                    { key: 'account', label: '账户密码登录' },
+                    { key: 'mobile', label: '手机号登录', style: { color: 'white' } },
+                  ]}
+                />
 
                 {userLoginState.code === 500 && type === 'account' && (
                   <LoginMessage content={userLoginState.msg || '登录失败，请重试！'} />
@@ -244,7 +257,7 @@ const Login: React.FC = () => {
                         size: 'middle',
                       }}
                       placeholder={'短信验证码'}
-                      captchaTextRender={(timing, count) => {
+                      captchaTextRender={(timing: any, count: any) => {
                         if (timing) {
                           return `${count} ${'秒后重新获取'}`;
                         }
@@ -258,7 +271,7 @@ const Login: React.FC = () => {
                           message: '请输入您的验证码',
                         },
                       ]}
-                      onGetCaptcha={async (phone) => {
+                      onGetCaptcha={async (phone: any) => {
                         const result = await getFakeCaptcha({
                           phone,
                         });

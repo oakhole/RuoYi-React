@@ -1,13 +1,21 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:52:41
+ * @FilePath: /RuoYi-React/src/pages/system/dept/index.tsx
+ * @Description: 系统管理 - 部门管理
+ */
 import { PlusOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge, Popconfirm } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, useAccess } from 'umi';
+import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
 
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import { FooterToolbar, PageContainer } from '@ant-design/pro-components';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { DeptType, DeptListParams } from './data.d';
 import { getDeptList, getDeptListExcludeChild, removeDept, addDept, updateDept } from './service';
 import UpdateForm from './components/edit';
@@ -190,7 +198,7 @@ const DeptTableList: React.FC = () => {
           key="edit"
           hidden={!access.hasPerms('system:dept:edit')}
           onClick={() => {
-            getDeptListExcludeChild(record.deptId).then((res) => {
+            getDeptListExcludeChild().then((res) => {
               if (res.code === 200) {
                 let depts = buildTreeData(res.data, 'deptId', 'deptName', '', '', '');
                 if (depts.length === 0) {
@@ -237,66 +245,64 @@ const DeptTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
-      <div style={{ width: '100%', float: 'right' }}>
-        <ProTable<DeptType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="deptId"
-          key="deptList"
-          search={{
-            labelWidth: 'auto',
-          }}
-          toolBarRender={() => [
-            <Button
-              type="text"
-              key="add"
-              hidden={!access.hasPerms('system:dept:add')}
-              onClick={async () => {
-                getDeptList().then((res) => {
-                  if (res.code === 200) {
-                    setDeptTree(buildTreeData(res.data, 'deptId', 'deptName', '', '', ''));
-                    setCurrentRow(undefined);
-                    setModalVisible(true);
-                  } else {
-                    message.warn(res.msg);
-                  }
-                });
-              }}
-            >
-              <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-            </Button>,
-          ]}
-          request={(params) =>
-            getDeptList({ ...params } as DeptListParams).then((res) => {
-              return {
-                data: buildTreeData(res.data, 'deptId', '', '', '', ''),
-                total: res.data.length,
-                success: true,
-              };
-            })
-          }
-          columns={columns}
-          expandable={{
-            expandRowByClick: true,
-            expandedRowKeys: expandedKeys,
-            onExpand: (expanded, record) => {
-              if (expanded) {
-                expandedKeys.push(record.deptId);
-              } else {
-                remove(expandedKeys, (deptId) => {
-                  return deptId === record.deptId;
-                });
-              }
-            },
-          }}
-          pagination={false}
-        />
-      </div>
+    <PageContainer>
+      <ProTable<DeptType>
+        headerTitle={intl.formatMessage({
+          id: 'pages.searchTable.title',
+          defaultMessage: '信息',
+        })}
+        actionRef={actionRef}
+        formRef={formTableRef}
+        rowKey="deptId"
+        key="deptList"
+        search={{
+          labelWidth: 'auto',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="text"
+            key="add"
+            hidden={!access.hasPerms('system:dept:add')}
+            onClick={async () => {
+              getDeptList().then((res) => {
+                if (res.code === 200) {
+                  setDeptTree(buildTreeData(res.data, 'deptId', 'deptName', '', '', ''));
+                  setCurrentRow(undefined);
+                  setModalVisible(true);
+                } else {
+                  message.warn(res.msg);
+                }
+              });
+            }}
+          >
+            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+          </Button>,
+        ]}
+        request={(params) =>
+          getDeptList({ ...params } as DeptListParams).then((res) => {
+            return {
+              data: buildTreeData(res.data, 'deptId', '', '', '', ''),
+              total: res.data.length,
+              success: true,
+            };
+          })
+        }
+        columns={columns}
+        expandable={{
+          expandRowByClick: true,
+          expandedRowKeys: expandedKeys,
+          onExpand: (expanded, record) => {
+            if (expanded) {
+              expandedKeys.push(record.deptId);
+            } else {
+              remove(expandedKeys, (deptId) => {
+                return deptId === record.deptId;
+              });
+            }
+          },
+        }}
+        pagination={false}
+      />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -356,7 +362,7 @@ const DeptTableList: React.FC = () => {
         deptTree={deptTree}
         statusOptions={statusOptions}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

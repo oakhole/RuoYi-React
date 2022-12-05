@@ -1,13 +1,21 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 21:27:50
+ * @FilePath: /RuoYi-React/src/pages/system/role/index.tsx
+ * @Description: 角色页面
+ */
 import { PlusOutlined, FileExcelOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
 import { Popconfirm } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, useAccess } from 'umi';
-import { FooterToolbar, GridContent } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
+import { FooterToolbar, PageContainer } from '@ant-design/pro-components';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { RoleType, RoleListParams } from './data.d';
 import {
   getRoleList,
@@ -280,7 +288,7 @@ const RoleTableList: React.FC = () => {
   ];
 
   return (
-    <GridContent>
+    <PageContainer>
       <ProTable<RoleType>
         headerTitle={intl.formatMessage({
           id: 'pages.searchTable.title',
@@ -394,7 +402,7 @@ const RoleTableList: React.FC = () => {
         menuCheckedKeys={menuIds || []}
         statusOptions={statusOptions}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

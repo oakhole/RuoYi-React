@@ -1,17 +1,25 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 22:54:11
+ * @FilePath: /RuoYi-React/src/pages/monitor/joblog/index.tsx
+ * @Description: 监控管理 - 定时任务 - 调度日志
+ */
 import { ExclamationCircleOutlined, ClearOutlined, FileExcelOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Badge } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage, history, useAccess } from 'umi';
+import { useIntl, FormattedMessage, history, useAccess } from '@umijs/max';
 
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import type { ProColumns, ActionType } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { JobLogType } from './data.d';
 import { getJobLogList, removeJobLog, exportJobLog, cleanJobLog } from './service';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-import { FooterToolbar, PageContainer } from '@ant-design/pro-layout';
+import { FooterToolbar, PageContainer } from '@ant-design/pro-components';
 
 /**
  * 删除节点
@@ -239,12 +247,7 @@ const JobLogTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer
-      breadcrumb={undefined}
-      onBack={() => history.goBack()}
-      title="定时任务"
-      subTitle="调度日志"
-    >
+    <PageContainer onBack={() => history.back()} title="定时任务" subTitle="调度日志">
       <ProTable<JobLogType>
         headerTitle={intl.formatMessage({
           id: 'pages.searchTable.title',

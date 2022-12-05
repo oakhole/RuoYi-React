@@ -1,11 +1,11 @@
 import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Upload, message, Form } from 'antd';
-import ProForm, { ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
+import { ProForm, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
 import { queryCurrentUserInfo } from '../service';
 
 import styles from './BaseView.less';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 
 // const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
 //   if (!value[0]) {

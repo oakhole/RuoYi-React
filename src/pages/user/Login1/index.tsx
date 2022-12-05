@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-01 17:22:41
+ * @FilePath: /RuoYi-React/src/pages/user/Login1/index.tsx
+ * @Description: 登录页 - 1
+ */
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -9,8 +17,8 @@ import {
 } from '@ant-design/icons';
 import { Alert, Space, message, Tabs, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
-import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import { Link, history, useModel } from 'umi';
+import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
+import { Link, history, useModel } from '@umijs/max';
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha, getCaptcha } from '@/services/ant-design-pro/login';

@@ -1,9 +1,17 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-05 23:23:22
+ * @FilePath: /RuoYi-React/src/pages/dashboard/index.tsx
+ * @Description: 首页 - 工作台
+ */
 import type { FC } from 'react';
 import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd';
 import { Radar } from '@ant-design/charts';
 
-import { Link, useModel, useRequest } from 'umi';
-import { PageContainer } from '@ant-design/pro-layout';
+import { Link, useModel, useRequest } from '@umijs/max';
+import { PageContainer } from '@ant-design/pro-components';
 import moment from 'moment';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';

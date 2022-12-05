@@ -1,4 +1,4 @@
-import request from 'umi-request';
+import { request } from '@umijs/max';
 
 const mimeMap = {
   xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

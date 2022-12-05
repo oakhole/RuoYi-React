@@ -5,9 +5,9 @@ import {
   ProFormSelect,
   ProFormTextArea,
   ProFormRadio,
-} from '@ant-design/pro-form';
+} from '@ant-design/pro-components';
 import { Form, Modal, Row, Col } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { NoticeType } from '../data.d';
 
 export type NoticeFormValueType = Record<string, unknown> & Partial<NoticeType>;

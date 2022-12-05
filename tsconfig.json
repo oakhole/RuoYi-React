@@ -26,13 +26,13 @@
   "include": [
     "mock/**/*",
     "src/**/*",
+    "playwright.config.ts",
     "tests/**/*",
     "test/**/*",
     "__test__/**/*",
     "typings/**/*",
     "config/**/*",
     ".eslintrc.js",
-    ".stylelintrc.js",
     ".prettierrc.js",
     "jest.config.js",
     "mock/*"

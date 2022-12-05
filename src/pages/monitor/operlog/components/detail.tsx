@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Modal, Descriptions, Button } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage } from '@umijs/max';
 import type { OperlogType } from '../data';
 
 export type OperlogFormValueType = Record<string, unknown> & Partial<OperlogType>;
