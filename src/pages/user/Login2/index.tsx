@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:09
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 14:12:34
+ * @FilePath: /RuoYi-React/src/pages/user/Login2/index.tsx
+ * @Description: 登录页2
+ */
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -15,6 +23,7 @@ import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha, getCaptcha } from '@/services/ant-design-pro/login';
 import styles from './index.less';
+import { parse } from 'query-string';
 
 const LoginMessage: React.FC<{
   content?: string;
@@ -80,7 +89,7 @@ const Login: React.FC = () => {
         await fetchUserInfo();
         /** 此方法会跳转到 redirect 参数所在的位置 */
         if (!history) return;
-        const { query } = history.location;
+        const query = parse(history.location.search);
         const { redirect } = query as {
           redirect: string;
         };

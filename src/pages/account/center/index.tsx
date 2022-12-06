@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:08
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 14:48:13
+ * @FilePath: /RuoYi-React/src/pages/account/center/index.tsx
+ * @Description: 账户中心
+ */
 import {
   ClusterOutlined,
   MailOutlined,
@@ -15,7 +23,7 @@ import styles from './Center.less';
 import BaseInfo from './components/BaseInfo';
 import ResetPassword from './components/ResetPassword';
 import AvatarCropper from './components/AvatarCropper';
-import { GridContent } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import PageLoading from '@/pages/dashboard/analysis/components/PageLoading';
 
 const operationTabList = [
@@ -126,7 +134,7 @@ const Center: React.FC = () => {
   }
 
   return (
-    <GridContent>
+    <PageContainer>
       <Row gutter={[16, 24]}>
         <Col lg={6} md={24}>
           <Card title="个人信息" bordered={false} loading={loading}>
@@ -182,7 +190,7 @@ const Center: React.FC = () => {
         visible={cropperModalVisible}
         data={currentUser.avatar}
       />
-    </GridContent>
+    </PageContainer>
   );
 };
 

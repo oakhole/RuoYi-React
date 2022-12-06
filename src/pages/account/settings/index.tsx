@@ -1,5 +1,13 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:08
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 14:34:52
+ * @FilePath: /RuoYi-React/src/pages/account/settings/index.tsx
+ * @Description: 账号管理 - 基本设置
+ */
 import React, { useState, useRef, useLayoutEffect } from 'react';
-import { GridContent } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import { Menu } from 'antd';
 import BaseView from './components/base';
 import BindingView from './components/binding';
@@ -77,7 +85,7 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <GridContent>
+    <PageContainer>
       <div
         className={styles.main}
         ref={(ref) => {
@@ -105,7 +113,7 @@ const Settings: React.FC = () => {
           {renderChildren()}
         </div>
       </div>
-    </GridContent>
+    </PageContainer>
   );
 };
 export default Settings;

@@ -1,5 +1,13 @@
-import moment from 'moment';
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:03
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 00:44:21
+ * @FilePath: /RuoYi-React/src/pages/dashboard/analysis/utils/utils.ts
+ * @Description:
+ */
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
+import dayjs from 'dayjs';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 
@@ -15,7 +23,7 @@ export function getTimeDistance(type: 'today' | 'week' | 'month' | 'year'): Rang
     now.setHours(0);
     now.setMinutes(0);
     now.setSeconds(0);
-    return [moment(now), moment(now.getTime() + (oneDay - 1000))];
+    return [dayjs(now), dayjs(now.getTime() + (oneDay - 1000))];
   }
 
   if (type === 'week') {
@@ -32,21 +40,21 @@ export function getTimeDistance(type: 'today' | 'week' | 'month' | 'year'): Rang
 
     const beginTime = now.getTime() - day * oneDay;
 
-    return [moment(beginTime), moment(beginTime + (7 * oneDay - 1000))];
+    return [dayjs(beginTime), dayjs(beginTime + (7 * oneDay - 1000))];
   }
   const year = now.getFullYear();
 
   if (type === 'month') {
     const month = now.getMonth();
-    const nextDate = moment(now).add(1, 'months');
+    const nextDate = dayjs(now).add(1, 'months');
     const nextYear = nextDate.year();
     const nextMonth = nextDate.month();
 
     return [
-      moment(`${year}-${fixedZero(month + 1)}-01 00:00:00`),
-      moment(moment(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() - 1000),
+      dayjs(`${year}-${fixedZero(month + 1)}-01 00:00:00`),
+      dayjs(dayjs(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() - 1000),
     ];
   }
 
-  return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
+  return [dayjs(`${year}-01-01 00:00:00`), dayjs(`${year}-12-31 23:59:59`)];
 }

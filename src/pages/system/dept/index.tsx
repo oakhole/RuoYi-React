@@ -208,7 +208,7 @@ const DeptTableList: React.FC = () => {
                 setModalVisible(true);
                 setCurrentRow(record);
               } else {
-                message.warn(res.msg);
+                message.warning(res.msg);
               }
             });
           }}
@@ -270,7 +270,7 @@ const DeptTableList: React.FC = () => {
                   setCurrentRow(undefined);
                   setModalVisible(true);
                 } else {
-                  message.warn(res.msg);
+                  message.warning(res.msg);
                 }
               });
             }}

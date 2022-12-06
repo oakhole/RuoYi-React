@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-21 14:27:03
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-02 09:46:07
+ * @LastEditTime: 2022-12-06 14:51:29
  * @FilePath: /RuoYi-React/src/pages/account/center/components/BaseInfo/index.tsx
  * @Description: 用户中心 - 个人信息
  */
@@ -26,7 +26,7 @@ const BaseInfo: React.FC<BaseInfoProps> = (props) => {
     if (resp.code === 200) {
       message.success('修改成功');
     } else {
-      message.warn(resp.msg);
+      message.warning(resp.msg);
     }
   };
 

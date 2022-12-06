@@ -1,9 +1,21 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:08
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 00:41:16
+ * @FilePath: /RuoYi-React/src/global.tsx
+ * @Description: 全局操作
+ */
 import { Button, message, notification } from 'antd';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { useIntl } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 
 const { pwa } = defaultSettings;
 const isHttps = document.location.protocol === 'https:';
+
+dayjs.extend(relativeTime);
 
 const clearCache = () => {
   // remove all caches

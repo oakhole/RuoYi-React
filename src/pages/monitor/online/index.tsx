@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-21 14:27:03
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-05 22:53:34
+ * @LastEditTime: 2022-12-06 00:44:54
  * @FilePath: /RuoYi-React/src/pages/monitor/online/index.tsx
  * @Description: 监控管理 - 在线用户
  */
@@ -16,7 +16,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import type { OnlineUserType } from './data.d';
 import { getOnlineUserList, forceLogout } from './service';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const handleRemoveOne = async (selectedRow: OnlineUserType) => {
   const hide = message.loading('正在强制下线');
@@ -89,7 +89,7 @@ const OnlineUserTableList: React.FC = () => {
       dataIndex: 'loginTime',
       valueType: 'dateRange',
       hideInSearch: true,
-      render: (_, record) => <span>{moment(record.loginTime).format('yyyy-MM-DD HH:mm:ss')}</span>,
+      render: (_, record) => <span>{dayjs(record.loginTime).format('yyyy-MM-DD HH:mm:ss')}</span>,
       search: {
         transform: (value) => {
           return {

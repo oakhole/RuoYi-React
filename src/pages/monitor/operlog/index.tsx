@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-21 14:27:03
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-05 22:50:02
+ * @LastEditTime: 2022-12-06 00:52:27
  * @FilePath: /RuoYi-React/src/pages/monitor/operlog/index.tsx
  * @Description: 系统管理 - 日志管理 - 操作日志
  */
@@ -250,6 +250,7 @@ const OperlogTableList: React.FC = () => {
       title: <FormattedMessage id="monitor.Operlog.oper_ip" defaultMessage="主机地址" />,
       dataIndex: 'operIp',
       valueType: 'text',
+      width: 140,
       copyable: true,
       hideInSearch: true,
     },
@@ -296,6 +297,7 @@ const OperlogTableList: React.FC = () => {
       title: <FormattedMessage id="monitor.Operlog.oper_time" defaultMessage="操作时间" />,
       dataIndex: 'operTime',
       valueType: 'dateRange',
+      width: 200,
       sorter: true,
       defaultSortOrder: 'descend',
       render: (_, record) => <span>{record.operTime}</span>,

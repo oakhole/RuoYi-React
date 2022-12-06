@@ -1,15 +1,13 @@
-@import '~antd/es/style/themes/default.less';
-
 .main {
   display: flex;
   width: 100%;
   height: 100%;
   padding-top: 16px;
   padding-bottom: 16px;
-  background-color: @menu-bg;
+  background-color: #fff;
   .leftMenu {
     width: 224px;
-    border-right: @border-width-base @border-style-base @border-color-split;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
     :global {
       .ant-menu-inline {
         border: none;
@@ -24,7 +22,7 @@
     padding: 8px 40px;
     .title {
       margin-bottom: 12px;
-      color: @heading-color;
+      color: fade(#000, 85%);
       font-weight: 500;
       font-size: 20px;
       line-height: 28px;
@@ -32,7 +30,7 @@
   }
   :global {
     .ant-list-split .ant-list-item:last-child {
-      border-bottom: 1px solid @border-color-split;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
     .ant-list-item {
       padding-top: 14px;
@@ -48,7 +46,7 @@
       color: #ff4000;
       font-size: 48px;
       line-height: 48px;
-      border-radius: @border-radius-base;
+      border-radius: 6px;
     }
     .dingding {
       margin: 2px;
@@ -57,29 +55,18 @@
       font-size: 32px;
       line-height: 32px;
       background-color: #2eabff;
-      border-radius: @border-radius-base;
+      border-radius: 6px;
     }
     .alipay {
       color: #2eabff;
       font-size: 48px;
       line-height: 48px;
-      border-radius: @border-radius-base;
+      border-radius: 6px;
     }
-  }
-
-  // 密码强度
-  font.strong {
-    color: @success-color;
-  }
-  font.medium {
-    color: @warning-color;
-  }
-  font.weak {
-    color: @error-color;
   }
 }
 
-@media screen and (max-width: @screen-md) {
+@media screen and (max-width: 768px) {
   .main {
     flex-direction: column;
     .leftMenu {

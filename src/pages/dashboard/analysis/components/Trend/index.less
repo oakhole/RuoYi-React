@@ -1,8 +1,6 @@
-@import '~antd/es/style/themes/default.less';
-
 .trendItem {
   display: inline-block;
-  font-size: @font-size-base;
+  font-size: 14px;
   line-height: 22px;
 
   .up,
@@ -16,22 +14,22 @@
     }
   }
   .up {
-    color: @red-6;
+    color: #f5222d;
   }
   .down {
     top: -1px;
-    color: @green-6;
+    color: #52c41a;
   }
 
   &.trendItemGrey .up,
   &.trendItemGrey .down {
-    color: @text-color;
+    color: fade(#000, 85%);
   }
 
   &.reverseColor .up {
-    color: @green-6;
+    color: #52c41a;
   }
   &.reverseColor .down {
-    color: @red-6;
+    color: #f5222d;
   }
 }

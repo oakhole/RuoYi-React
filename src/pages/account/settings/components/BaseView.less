@@ -1,5 +1,3 @@
-@import '~antd/es/style/themes/default.less';
-
 .baseView {
   display: flex;
   padding-top: 12px;
@@ -20,8 +18,8 @@
     .avatar_title {
       height: 22px;
       margin-bottom: 8px;
-      color: @heading-color;
-      font-size: @font-size-base;
+      color: fade(#000, 85%);
+      font-size: 14px;
       line-height: 22px;
     }
     .avatar {
@@ -47,7 +45,7 @@
   width: 214px;
 }
 
-@media screen and (max-width: @screen-xl) {
+@media screen and (max-width: 1200px) {
   .baseView {
     flex-direction: column-reverse;
 

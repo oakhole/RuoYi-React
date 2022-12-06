@@ -1,7 +1,15 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:08
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 00:41:33
+ * @FilePath: /RuoYi-React/src/components/NoticeIcon/index.tsx
+ * @Description:
+ */
 import { useEffect, useState } from 'react';
 import { Tag, message } from 'antd';
 import { groupBy } from 'lodash';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useModel, useRequest } from '@umijs/max';
 import { getNotices } from '@/services/ant-design-pro/api';
 
@@ -21,9 +29,8 @@ const getNoticeData = (notices: API.NoticeIconItem[]): Record<string, API.Notice
 
   const newNotices = notices.map((notice) => {
     const newNotice = { ...notice };
-
     if (newNotice.datetime) {
-      newNotice.datetime = moment(notice.datetime as string).fromNow();
+      newNotice.datetime = dayjs(notice.datetime as string).fromNow();
     }
 
     if (newNotice.id) {

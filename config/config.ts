@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-23 15:11:44
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-05 21:07:44
+ * @LastEditTime: 2022-12-05 23:51:34
  * @FilePath: /RuoYi-React/config/config.ts
  * @Description: umi 配置
  */
@@ -22,7 +22,7 @@ export default defineConfig({
   initialState: {},
   model: {},
   request: {},
-  antd: {},
+  antd: { import: false },
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
     locale: true,

@@ -22,7 +22,7 @@ const ResetPassword: React.FC = () => {
     if (resp.code === 200) {
       message.success('密码重置成功。');
     } else {
-      message.warn(resp.msg);
+      message.warning(resp.msg);
     }
   };
 

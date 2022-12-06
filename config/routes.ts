@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-21 14:27:02
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-05 21:20:29
+ * @LastEditTime: 2022-12-06 00:47:13
  * @FilePath: /RuoYi-React/config/routes.ts
  * @Description: 路由配置
  */
@@ -182,6 +182,12 @@ export default [
         name: 'job',
         path: '/monitor/job',
         component: 'monitor/job',
+      },
+      {
+        title: 'menu.monitor.schedule.log',
+        name: 'job',
+        path: '/monitor/job/log',
+        component: 'monitor/joblog',
       },
       {
         title: 'menu.monitor.schedule.log',

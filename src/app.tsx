@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-21 14:27:03
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-05 22:38:13
+ * @LastEditTime: 2022-12-06 14:47:18
  * @FilePath: /RuoYi-React/src/app.tsx
  * @Description: 项目运行时环境配置
  */
@@ -11,7 +11,12 @@ import { SettingDrawer } from '@ant-design/pro-components';
 import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
 import { history } from '@umijs/max';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { createFromIconfontCN } from '@ant-design/icons';
+import {
+  createFromIconfontCN,
+  LogoutOutlined,
+  QuestionCircleOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 import { getRouters } from './services/ant-design-pro/menu';
 import RightContent from './components/RightContent';
 import { GlobalRequestConfig } from './request';
@@ -83,11 +88,43 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
   return {
     rightContentRender: () => <RightContent />,
     avatarProps: {
-      src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-      title: '七妮妮',
+      src:
+        initialState?.currentUser?.avatar || 'http://vue.ruoyi.vip/static/img/profile.473f5971.jpg',
+      title: initialState?.currentUser?.nickName,
       size: 'small',
+      onClick: () => {
+        history.push('/account/center');
+      },
     },
+    actionsRender: (props) => {
+      if (props.isMobile) return [];
+      return [
+        <a
+          href="https://pro.ant.design/docs/getting-started"
+          target="_blank"
+          title="帮助文档"
+          rel="noreferrer"
+          style={{ color: 'inherit' }}
+        >
+          <QuestionCircleOutlined />
+        </a>,
+        <SettingOutlined
+          onClick={() => {
+            history.push('/account/settings');
+          }}
+        />,
+        <LogoutOutlined
+          title="注销"
+          onClick={() => {
+            setInitialState((s) => ({ ...s, currentUser: undefined, token: '' }));
+            history.push('/user/login');
+          }}
+        />,
+      ];
+    },
+    breakpoint: 'lg',
     pageTitleRender: false,
+    disableContentMargin: false,
     waterMarkProps: {
       content: initialState?.currentUser?.nickName + ' ' + initialState?.currentUser?.userName,
       fontColor: 'rgba(0, 0, 0, 0.05)',

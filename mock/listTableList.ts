@@ -1,6 +1,14 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-11-21 14:27:02
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 00:41:52
+ * @FilePath: /RuoYi-React/mock/listTableList.ts
+ * @Description:
+ */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { parse } from 'url';
 
 // mock tableListDataSource
@@ -22,8 +30,8 @@ const genList = (current: number, pageSize: number) => {
       desc: '这是一段描述',
       callNo: Math.floor(Math.random() * 1000),
       status: Math.floor(Math.random() * 10) % 4,
-      updatedAt: moment().format('YYYY-MM-DD'),
-      createdAt: moment().format('YYYY-MM-DD'),
+      updatedAt: dayjs().format('YYYY-MM-DD'),
+      createdAt: dayjs().format('YYYY-MM-DD'),
       progress: Math.ceil(Math.random() * 100),
     });
   }
@@ -133,8 +141,8 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
           desc,
           callNo: Math.floor(Math.random() * 1000),
           status: Math.floor(Math.random() * 10) % 2,
-          updatedAt: moment().format('YYYY-MM-DD'),
-          createdAt: moment().format('YYYY-MM-DD'),
+          updatedAt: dayjs().format('YYYY-MM-DD'),
+          createdAt: dayjs().format('YYYY-MM-DD'),
           progress: Math.ceil(Math.random() * 100),
         };
         tableListDataSource.unshift(newRule);

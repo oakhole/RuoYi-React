@@ -1,13 +1,11 @@
-@import '~antd/es/style/themes/default.less';
-
 .iconGroup {
   span.anticon {
     margin-left: 16px;
-    color: @text-color-secondary;
+    color: fade(#000, 45%);
     cursor: pointer;
     transition: color 0.32s;
     &:hover {
-      color: @text-color;
+      color: fade(#000, 85%);
     }
   }
 }
@@ -33,7 +31,7 @@
       visibility: hidden;
     }
     span {
-      color: @text-color;
+      color: fade(#000, 85%);
       font-size: 14px;
       line-height: 22px;
     }
@@ -47,7 +45,7 @@
       font-size: 12px;
       line-height: 20px;
       text-align: center;
-      background-color: @tag-default-bg;
+      background-color: hsv(0, 0, 98%);
       border-radius: 20px;
       &.active {
         color: #fff;
@@ -69,12 +67,12 @@
   margin-right: 24px;
   a {
     margin-left: 24px;
-    color: @text-color;
+    color: fade(#000, 85%);
     &:hover {
-      color: @primary-color;
+      color: #1677ff;
     }
     &.currentDate {
-      color: @primary-color;
+      color: #1677ff;
     }
   }
 }
@@ -140,17 +138,17 @@
       right: 6px;
     }
     .ant-tabs-tab-active h4 {
-      color: @primary-color;
+      color: #1677ff;
     }
   }
 }
 
 .trendText {
   margin-left: 8px;
-  color: @heading-color;
+  color: fade(#000, 85%);
 }
 
-@media screen and (max-width: @screen-lg) {
+@media screen and (max-width: 992px) {
   .salesExtra {
     display: none;
   }
@@ -164,7 +162,7 @@
   }
 }
 
-@media screen and (max-width: @screen-md) {
+@media screen and (max-width: 768px) {
   .rankingTitle {
     margin-top: 16px;
   }
@@ -174,7 +172,7 @@
   }
 }
 
-@media screen and (max-width: @screen-sm) {
+@media screen and (max-width: 576px) {
   .salesExtraWrap {
     display: none;
   }

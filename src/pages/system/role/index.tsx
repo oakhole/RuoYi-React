@@ -251,7 +251,7 @@ const RoleTableList: React.FC = () => {
                 setModalVisible(true);
                 setCurrentRow(record);
               } else {
-                message.warn(res.msg);
+                message.warning(res.msg);
               }
             });
           }}
@@ -315,7 +315,7 @@ const RoleTableList: React.FC = () => {
                   setModalVisible(true);
                   setCurrentRow(undefined);
                 } else {
-                  message.warn(res.msg);
+                  message.warning(res.msg);
                 }
               });
             }}

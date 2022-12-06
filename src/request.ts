@@ -2,7 +2,7 @@
  * @Author: Oakhole oakhole@163.com
  * @Date: 2022-12-05 16:55:23
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-05 20:13:02
+ * @LastEditTime: 2022-12-06 14:08:49
  * @FilePath: /RuoYi-React/src/request.ts
  * @Description: 封装 axios 请求全局配置
  */
@@ -11,6 +11,7 @@ import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
 import { lowerCase } from 'lodash';
 import queryString from 'query-string';
+import { history } from 'umi';
 
 /** 响应消息 */
 const codeMessage: Record<number, string> = {
@@ -86,7 +87,7 @@ const afterResponse = (response: any) => {
           redirect = '?redirect=' + redirect;
         }
         const search = history.location.search;
-        history.push(loginPath + redirect + search);
+        history.push('/user/login' + redirect + search);
         break;
       case 404:
       case 500:

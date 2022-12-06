@@ -1,9 +1,17 @@
 /*
  * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:08
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 14:54:23
+ * @FilePath: /RuoYi-React/src/pages/dashboard/workplace/index.tsx
+ * @Description:
+ */
+/*
+ * @Author: Oakhole oakhole@163.com
  * @Date: 2022-11-21 14:27:03
  * @LastEditors: Oakhole oakhole@163.com
- * @LastEditTime: 2022-12-05 23:23:54
- * @FilePath: /RuoYi-React/src/pages/dashboard/workplace/index.tsx
+ * @LastEditTime: 2022-12-06 00:24:23
+ * @FilePath: /RuoYi-React/src/pages/dashboard/workplace/index.dayjs(
  * @Description: 工作台页面
  */
 import type { FC } from 'react';
@@ -12,7 +20,7 @@ import { Radar } from '@ant-design/charts';
 
 import { Link, useModel, useRequest } from '@umijs/max';
 import { PageContainer } from '@ant-design/pro-components';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
 import type { ActivitiesType } from './data.d';
@@ -111,7 +119,7 @@ const Workplace: FC = () => {
           }
           description={
             <span className={styles.datetime} title={item.updatedAt}>
-              {moment(item.updatedAt).fromNow()}
+              {dayjs(item.updatedAt).fromNow()}
             </span>
           }
         />
@@ -161,7 +169,7 @@ const Workplace: FC = () => {
                     <Link to={item.memberLink}>{item.member || ''}</Link>
                     {item.updatedAt && (
                       <span className={styles.datetime} title={item.updatedAt}>
-                        {moment(item.updatedAt).fromNow()}
+                        {dayjs(item.updatedAt).fromNow()}
                       </span>
                     )}
                   </div>

@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:08
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 14:25:24
+ * @FilePath: /RuoYi-React/src/components/RightContent/AvatarDropdown.tsx
+ * @Description:
+ */
 import React, { useCallback } from 'react';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
@@ -7,6 +15,7 @@ import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import { outLogin } from '@/services/ant-design-pro/api';
 import type { MenuInfo } from 'rc-menu/lib/interface';
+import { parse } from 'query-string';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -17,7 +26,8 @@ export type GlobalHeaderRightProps = {
  */
 const loginOut = async () => {
   await outLogin();
-  const { query = {}, pathname } = history.location;
+  const { pathname } = history.location;
+  const query = parse(history.location.search);
   const { redirect } = query;
   // Note: There may be security issues, please note
   if (window.location.pathname !== '/user/login' && !redirect) {

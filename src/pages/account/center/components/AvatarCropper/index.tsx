@@ -1,3 +1,11 @@
+/*
+ * @Author: Oakhole oakhole@163.com
+ * @Date: 2022-12-05 23:35:08
+ * @LastEditors: Oakhole oakhole@163.com
+ * @LastEditTime: 2022-12-06 14:51:07
+ * @FilePath: /RuoYi-React/src/pages/account/center/components/AvatarCropper/index.tsx
+ * @Description: 头像裁剪
+ */
 import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Row, Col, Button, Space, Upload, message } from 'antd';
 import { useIntl } from '@umijs/max';
@@ -40,7 +48,7 @@ const AvatarCropperForm: React.FC<AvatarCropperProps> = (props) => {
           message.success(res.msg);
           props.onFinished(true);
         } else {
-          message.warn(res.msg);
+          message.warning(res.msg);
         }
       });
     }, 'image/png');
